@@ -1,4 +1,4 @@
-FROM hongfs/phpenv:7.4-cli
+FROM ghcr.io/hongfs/test-env:php74-cli
 
 WORKDIR /code/
 
