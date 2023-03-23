@@ -40,7 +40,7 @@ jobs:
 
             if [ -e "$name/Dockerfile" ]; then
               docker build --no-cache -t $GITHUB_REPOSITORY:$name ./$name/
-              docker tag $GITHUB_REPOSITORY:$name "ghcr.io/$GITHUB_ACTOR/$GITHUB_REPOSITORY:$name"
-              docker push "ghcr.io/$GITHUB_ACTOR/$GITHUB_REPOSITORY:$name"
+              docker tag $GITHUB_REPOSITORY:$name "ghcr.io/$GITHUB_REPOSITORY:$name"
+              docker push "ghcr.io/$GITHUB_REPOSITORY:$name"
             fi
           done
