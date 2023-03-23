@@ -30,4 +30,17 @@ jobs:
 
       - name: 筛选存在修改的目录
         run: |
-          export
+          echo "筛选"
+          cd $GITHUB_WORKSPACE
+
+          for name in $(git diff --name-only HEAD^ HEAD | awk -F/ '{print $1}' | sort -u); do
+            if [[ $name == .* ]]; then
+              continue
+            fi
+
+            if [ -e "$name/Dockerfile" ]; then
+              docker build --no-cache -t $GITHUB_REPOSITORY:$name ./$name/
+              docker tag $GITHUB_REPOSITORY:$name "ghcr.io/$GITHUB_ACTOR/$GITHUB_REPOSITORY:$name"
+              docker push "ghcr.io/$GITHUB_ACTOR/$GITHUB_REPOSITORY:$name"
+            fi
+          done
