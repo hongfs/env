@@ -1,9 +1,12 @@
-name: Create and publish a Docker image
+name: Build Docker image
 
 on:
   push:
     branches:
       - main
+
+env:
+  REGISTRY: ghcr.io
 
 jobs:
   build-and-push-image:
@@ -24,13 +27,12 @@ jobs:
       - name: Log in to the Container registry
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
-          registry: ghcr.io
+          registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 筛选存在修改的目录
+      - name: Build
         run: |
-          echo "筛选"
           cd $GITHUB_WORKSPACE
 
           for name in $(git diff --name-only HEAD^ HEAD | awk -F/ '{print $1}' | sort -u); do
@@ -38,11 +40,9 @@ jobs:
               continue
             fi
 
-            echo "编译：$name"
-
             if [ -e "$name/Dockerfile" ]; then
-              docker build --no-cache -t $GITHUB_REPOSITORY:$name ./$name/
-              docker tag $GITHUB_REPOSITORY:$name "ghcr.io/$GITHUB_REPOSITORY:$name"
-              docker push "ghcr.io/$GITHUB_REPOSITORY:$name"
+              podman build --no-cache -t $GITHUB_REPOSITORY:$name ./$name/
+              podman tag $GITHUB_REPOSITORY:$name $REGISTRY/$GITHUB_REPOSITORY:$name
+              podman push $REGISTRY/$GITHUB_REPOSITORY:$name
             fi
           done
