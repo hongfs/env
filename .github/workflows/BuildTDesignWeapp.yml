@@ -24,3 +24,4 @@ jobs:
           cd $GITHUB_WORKSPACE
           npm i -d
           npm run build
+          ls -l
