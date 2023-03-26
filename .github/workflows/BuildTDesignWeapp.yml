@@ -22,6 +22,11 @@ jobs:
       - name: Build
         run: |
           cd $GITHUB_WORKSPACE
-          npm i -d
+          npm i
           npm run build
-          ls -l
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: Dist
+          path: $GITHUB_WORKSPACE/miniprogram_dist
+          retention-days: 90
