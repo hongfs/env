@@ -19,7 +19,7 @@ jobs:
       - name: Build
         run: |
           cd $GITHUB_WORKSPACE
-          git clone github.com/Tencent/tdesign-miniprogram
+          git clone git@github.com:Tencent/tdesign-miniprogram.git
           cd tdesign-miniprogram
           git checkout {{ env.VERSION }}
           git pull
