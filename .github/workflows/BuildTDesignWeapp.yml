@@ -28,5 +28,7 @@ jobs:
           npm run build
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: miniprogram_dist/
+          allowUpdates: true
+          omitBody: true
+          artifacts: miniprogram_dist/**
           tag: TDesign-1.0.4
