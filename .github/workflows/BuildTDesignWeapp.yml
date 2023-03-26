@@ -28,5 +28,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Dist
-          path: $GITHUB_WORKSPACE/miniprogram_dist
+          path: miniprogram_dist
           retention-days: 90
