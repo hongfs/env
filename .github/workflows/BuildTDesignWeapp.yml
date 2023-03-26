@@ -26,9 +26,10 @@ jobs:
           cd $GITHUB_WORKSPACE
           npm i
           npm run build
+          tar -czvf TDesign-1.0.4.tar.gz miniprogram_dist/
       - uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
           omitBody: true
-          artifacts: miniprogram_dist/**
+          artifacts: TDesign-1.0.4.tar.gz
           tag: TDesign-1.0.4
