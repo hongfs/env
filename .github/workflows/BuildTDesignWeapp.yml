@@ -13,12 +13,10 @@ jobs:
       cancel-in-progress: true
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          repository: Tencent/tdesign-miniprogram
-          ref: d81e812efe41c50640c60cac9b8c1ec699c09b62
-
       - name: Build
         run: |
           cd $GITHUB_WORKSPACE
+          git clone github.com/Tencent/tdesign-miniprogram
+          cd tdesign-miniprogram
+          git checkout 1.0.4
+          git pull
