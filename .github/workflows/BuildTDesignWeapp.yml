@@ -8,6 +8,8 @@ on:
 jobs:
   build-tdesign:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     concurrency:
       group: ${{ github.ref }}
       cancel-in-progress: true
@@ -24,15 +26,7 @@ jobs:
           cd $GITHUB_WORKSPACE
           npm i
           npm run build
-      - name: Upload
-        uses: actions/upload-artifact@v3
+      - uses: ncipollo/release-action@v1
         with:
-          name: Dist
-          path: miniprogram_dist
-          retention-days: 90
-      - name: Create a Release
-        uses: elgohr/Github-Release-Action@v4
-        env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-        with:
-          title: TDesign 1.0.4
+          artifacts: miniprogram_dist/
+          tag: TDesign-1.0.4
