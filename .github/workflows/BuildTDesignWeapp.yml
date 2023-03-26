@@ -17,7 +17,9 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: Tencent/tdesign-miniprogram
-          ref: refs/heads/1.0.4
+        run: |
+          git checkout 1.0.4
+          git pull
 
       - name: Build
         run: |
