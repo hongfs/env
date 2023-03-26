@@ -12,13 +12,12 @@ jobs:
   build-tdesign:
     runs-on: ubuntu-latest
     concurrency:
-      group: ${{ github.ref }}
+      group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
 
     steps:
       - name: Build
         run: |
-          export
           cd $GITHUB_WORKSPACE
           git clone github.com/Tencent/tdesign-miniprogram
           cd tdesign-miniprogram
