@@ -35,12 +35,10 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
 
-          for name in */; do
+          for name in $(git diff --name-only HEAD^ HEAD | awk -F/ '{print $1}' | sort -u); do
             if [[ $name == .* ]]; then
               continue
             fi
-
-            name="${name%*/}"
 
             if [ -e "$name/Dockerfile" ]; then
               podman build --no-cache -t $GITHUB_REPOSITORY:$name ./$name/
