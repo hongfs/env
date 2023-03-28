@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  version: 1.0.4
+
 jobs:
   build-tdesign:
     runs-on: ubuntu-latest
@@ -19,17 +22,17 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: Tencent/tdesign-miniprogram
-          ref: 1.0.4
+          ref: ${{ env.version }}
 
       - name: Build
         run: |
           cd $GITHUB_WORKSPACE
           npm i
           npm run build
-          tar -czvf TDesign-1.0.4.tar.gz miniprogram_dist/
+          tar -czvf TDesign-${{ env.version }}.tar.gz miniprogram_dist/
       - uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
           omitBody: true
-          artifacts: TDesign-1.0.4.tar.gz
-          tag: TDesign-1.0.4
+          artifacts: TDesign-${{ env.version }}.tar.gz
+          tag: TDesign-${{ env.version }}
