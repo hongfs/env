@@ -40,6 +40,8 @@ jobs:
               continue
             fi
 
+            name="${name%*/}"
+
             if [ -e "$name/Dockerfile" ]; then
               podman build --no-cache -t $GITHUB_REPOSITORY:$name ./$name/
               podman tag $GITHUB_REPOSITORY:$name $REGISTRY/$GITHUB_REPOSITORY:$name
