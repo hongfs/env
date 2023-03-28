@@ -35,7 +35,7 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
 
-          for name in */ ; do
+          for name in */; do
             if [[ $name == .* ]]; then
               continue
             fi
