@@ -2,8 +2,8 @@ name: Build TDesign MiniProgram
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - ".github/workflows/BuildTDesignWeapp.yml"
 
 env:
   version: 1.0.4
