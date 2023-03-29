@@ -8,4 +8,5 @@ RUN apt-get update && \
     apt-get -y install unzip curl && \
     unzip aws.zip && \
     ./aws/install && \
-    rm -rf aws.zip
+    rm -rf aws.zip && \
+    rm -rf /var/lib/apt/lists/*
