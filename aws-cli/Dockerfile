@@ -4,6 +4,8 @@ WORKDIR /code
 
 ADD https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip aws.zip
 
-RUN unzip aws.zip && \
+RUN apt-get update && \
+    apt-get -y install unzip && \
+    unzip aws.zip && \
     ./aws/install && \
     rm -rf aws.zip
