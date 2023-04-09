@@ -6,7 +6,7 @@ on:
       - ".github/workflows/BuildTDesignWeapp.yml"
 
 env:
-  version: 1.1.0
+  version: 1.1.1
 
 jobs:
   build-tdesign:
