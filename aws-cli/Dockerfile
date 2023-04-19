@@ -9,4 +9,5 @@ RUN apt-get update && \
     unzip aws.zip && \
     ./aws/install && \
     rm -rf aws.zip && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    echo "1"
