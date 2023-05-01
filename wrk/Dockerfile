@@ -4,7 +4,7 @@ FROM ghcr.io/hongfs/env:alpine as build
 
 WORKDIR /code
 
-RUN apk add --update alpine-sdk perl
+RUN apk add --update alpine-sdk perl linux-headers
 
 RUN git clone https://github.com/wg/wrk && \
     cd wrk && \
