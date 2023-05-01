@@ -4,17 +4,20 @@ FROM ghcr.io/hongfs/env:alpine as build
 
 WORKDIR /code
 
-RUN apk add --update alpine-sdk perl linux-headers
-
-RUN git clone https://github.com/wg/wrk && \
+RUN apk update && \
+    apk add alpine-sdk perl linux-headers && \
+    git clone https://github.com/wg/wrk && \
     cd wrk && \
-    make
+    make && \
+    rm -rf /var/cache/apk/*
 
 FROM ghcr.io/hongfs/env:alpine
 
 COPY --from=build /code/wrk /usr/local/bin/
 
-RUN apk add --no-cache libgcc
+RUN apk update && \
+    apk add libgcc && \
+    rm -rf /var/cache/apk/*
 
 WORKDIR /data
 
