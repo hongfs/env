@@ -1,7 +1,5 @@
 FROM library/composer:2.5.5 as composer
 
-RUN composer config -g repo.packagist composer https://hk.hongfs.dev/composer/
-
 FROM library/php:8.2.5-fpm as php
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
