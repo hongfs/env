@@ -5,7 +5,7 @@ FROM library/php:8.2.5-fpm as php
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN apt-get update && \
-    apt-get install -y git zip libpng-dev libzip-dev libmagickwand-dev iproute2 procps && \
+    apt-get install -y git zip libpng-dev libzip-dev libmagickwand-dev iproute2 procps cron && \
     rm -rf /var/lib/apt/lists/* && \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
