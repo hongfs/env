@@ -5,13 +5,14 @@ FROM library/php:8.2.5-fpm as php
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN apt-get update && \
-    apt-get install -y git zip libpng-dev libzip-dev && \
+    apt-get install -y git zip libpng-dev libzip-dev libmagickwand-dev && \
     rm -rf /var/lib/apt/lists/* && \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
     pecl install redis-5.3.7 && \
+    pecl install imagick-3.7.0 && \
     docker-php-ext-install pdo pdo_mysql mysqli gd zip bcmath opcache && \
-    docker-php-ext-enable mysqli gd redis
+    docker-php-ext-enable mysqli gd redis imagick
 
 # 设置 opcache
 RUN echo "[opcache]\n\
