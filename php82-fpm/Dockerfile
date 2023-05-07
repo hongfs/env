@@ -30,3 +30,10 @@ RUN echo "\n\
 pm = static\n\
 pm.max_children = 20\n\
 pm.max_requests = 50000" >> /usr/local/etc/php-fpm.d/zz-docker.conf
+
+# 设置 sysctl
+RUN echo "\n\
+net.ipv4.tcp_syncookies = 1\n\
+net.ipv4.tcp_tw_recycle = 1\n\
+net.ipv4.tcp_tw_reuse = 1\n\
+net.core.somaxconn = 65535" >> /etc/sysctl.conf
