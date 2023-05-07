@@ -5,7 +5,7 @@ FROM library/php:8.2.5-fpm as php
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN apt-get update && \
-    apt-get install -y git zip libpng-dev libzip-dev libmagickwand-dev iproute2 && \
+    apt-get install -y git zip libpng-dev libzip-dev libmagickwand-dev iproute2 sysctl && \
     rm -rf /var/lib/apt/lists/* && \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
@@ -29,5 +29,4 @@ opcache.enable_file_override=1" > /usr/local/etc/php/conf.d/opcache.ini
 RUN echo "\n\
 pm = static\n\
 pm.max_children = 20\n\
-pm.max_requests = 50000\n\
-pm.status_path = /hongfs/php-fpm/status" >> /usr/local/etc/php-fpm.d/zz-docker.conf
+pm.max_requests = 50000" >> /usr/local/etc/php-fpm.d/zz-docker.conf
