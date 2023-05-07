@@ -13,6 +13,7 @@ RUN apt-get update && \
     docker-php-ext-install pdo pdo_mysql mysqli gd zip bcmath opcache && \
     docker-php-ext-enable mysqli gd redis
 
+# 设置 opcache
 RUN echo "[opcache]\n\
 opcache.enable=1\n\
 opcache.enable_cli=1\n\
@@ -22,3 +23,9 @@ opcache.max_accelerated_files=1000000\n\
 opcache.max_wasted_percentage=10\n\
 opcache.validate_timestamps=0\n\
 opcache.enable_file_override=1" > /usr/local/etc/php/conf.d/opcache.ini
+
+# 设置 php-fpm
+RUN echo "\n\
+pm = static\n\
+pm.max_children = 20\n\
+pm.max_requests = 50000" > /usr/local/etc/php-fpm.d/zz-docker.conf
