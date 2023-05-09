@@ -29,7 +29,7 @@ foreach ($sheet_data[3] as $key => $lang) {
         if (!is_null($item['A'])) {
             $data[$item['A']] = trim($item[$key], ' ');
         } else if (!is_null($item[$key_index])) {
-            $data[$item[$key_index]] = trim($item[$key], '');
+            $data[$item[$key_index]] = trim($item[$key], ' ');
         }
     }
 
