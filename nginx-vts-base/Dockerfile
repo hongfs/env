@@ -1,15 +1,14 @@
 FROM alpine
 
-RUN sed -i "s+//dl-cdn.alpinelinux.org/+//hk.hongfs.dev/+" /etc/apk/repositories && \
-    apk update && \
+RUN apk update && \
     apk add --no-cache git curl gcc libc-dev make openssl-dev pcre2-dev zlib-dev linux-headers libxslt-dev gd-dev geoip-dev libedit-dev bash alpine-sdk findutils ca-certificates && \
     cd && \
-    git clone https://proxy.hongfs.cn/github.com/nginx/njs && \
+    git clone https://github.com/nginx/njs && \
     cd njs && \
     ./configure && \
     make njs && \
     cd ../ && \
-    git clone https://proxy.hongfs.cn/github.com/vozlt/nginx-module-vts && \
+    git clone https://github.com/vozlt/nginx-module-vts && \
     curl https://nginx.org/download/nginx-1.23.4.tar.gz -o nginx.tar.gz && \
     tar -zxvf nginx.tar.gz && \
     cd nginx-1.23.4 && \
