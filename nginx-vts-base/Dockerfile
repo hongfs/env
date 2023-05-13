@@ -52,8 +52,11 @@ RUN apk update && \
     mkdir -p /var/cache/nginx/proxy_temp && \
     mkdir -p /var/cache/nginx/fastcgi_temp && \
     mkdir -p /var/cache/nginx/uwsgi_temp && \
-    mkdir -p /var/cache/nginx/scgi_temp
+    mkdir -p /var/cache/nginx/scgi_temp && \
+    apk del .checksum-deps
 
 EXPOSE 80
+
+STOPSIGNAL SIGQUIT
 
 CMD ["nginx", "-g", "daemon off;"]
