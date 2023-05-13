@@ -54,9 +54,9 @@ RUN apk update && \
     mkdir -p /var/cache/nginx/uwsgi_temp && \
     mkdir -p /var/cache/nginx/scgi_temp && \
     rm -rf /var/cache/apk && \
-    rm -rf nginx.tar.gz && \
-    rm -rf nginx-module-vts && \
-    rm -rf nginx-1.23.4
+    rm -rf ~/nginx.tar.gz && \
+    rm -rf ~/nginx-module-vts && \
+    rm -rf ~/nginx-1.23.4
 
 EXPOSE 80
 
