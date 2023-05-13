@@ -52,7 +52,8 @@ RUN apk update && \
     mkdir -p /var/cache/nginx/proxy_temp && \
     mkdir -p /var/cache/nginx/fastcgi_temp && \
     mkdir -p /var/cache/nginx/uwsgi_temp && \
-    mkdir -p /var/cache/nginx/scgi_temp
+    mkdir -p /var/cache/nginx/scgi_temp && \
+    rm -rf /var/cache/apk
 
 EXPOSE 80
 
