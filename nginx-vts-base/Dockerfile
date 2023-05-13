@@ -1,7 +1,7 @@
 FROM alpine
 
 RUN apk update && \
-    apk add --no-cache --virtual .checksum-deps git curl gcc libc-dev make openssl-dev pcre pcre2 pcre2-dev zlib-dev linux-headers libxslt-dev gd-dev geoip-dev libedit-dev bash alpine-sdk findutils ca-certificates && \
+    apk add --no-cache --virtual git curl gcc libc-dev make openssl-dev pcre2-dev zlib-dev linux-headers libxslt-dev gd-dev geoip-dev libedit-dev bash alpine-sdk findutils ca-certificates && \
     cd && \
     git clone https://github.com/vozlt/nginx-module-vts.git && \
     curl https://repo.huaweicloud.com/nginx/nginx-1.23.4.tar.gz -o nginx.tar.gz && \
@@ -52,8 +52,7 @@ RUN apk update && \
     mkdir -p /var/cache/nginx/proxy_temp && \
     mkdir -p /var/cache/nginx/fastcgi_temp && \
     mkdir -p /var/cache/nginx/uwsgi_temp && \
-    mkdir -p /var/cache/nginx/scgi_temp && \
-    apk del .checksum-deps
+    mkdir -p /var/cache/nginx/scgi_temp
 
 EXPOSE 80
 
