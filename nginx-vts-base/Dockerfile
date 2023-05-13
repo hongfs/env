@@ -12,4 +12,6 @@ RUN apk update && \
     make install && \
     apk del .checksum-deps
 
-CMD [nginx, '-g', 'daemon off;']
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
