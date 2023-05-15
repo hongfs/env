@@ -45,8 +45,10 @@ jobs:
             if [ "$name" = "grafana-test" ]; then
               cp -f ./$name/zh-Hans.json /tmp/zh-Hans.json
               rm -rf ./$name/
-              git clone https://github.com/grafana/grafana.git $name
+              git clone -b v9.5.2 https://github.com/grafana/grafana.git $name
               cp /tmp/zh-Hans.json ./$name/public/locales/zh-Hans/grafana.json
+              docker buildx build --platform linux/arm,linux/arm64,linux/amd64 -t $REGISTRY/$GITHUB_REPOSITORY:$name --push ./$name/
+              continue
             fi
 
             if [ -e "$name/Dockerfile" ]; then
