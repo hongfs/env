@@ -42,6 +42,13 @@ jobs:
 
             echo "Building $name"
 
+            if [ "$name" = "grafana-test" ]; then
+              cp -f ./$name/zh-Hans.json /tmp/zh-Hans.json
+              rm -rf ./$name/
+              git clone https://github.com/grafana/grafana.git $name
+              cp /tmp/zh-Hans.json ./$name/public/locales/zh-Hans/grafana.json
+            fi
+
             if [ -e "$name/Dockerfile" ]; then
               podman build --no-cache -t $GITHUB_REPOSITORY:$name ./$name/
               podman tag $GITHUB_REPOSITORY:$name $REGISTRY/$GITHUB_REPOSITORY:$name
