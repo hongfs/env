@@ -44,11 +44,10 @@ jobs:
           
             if [ "$name" = "grafana-test" ]; then
               # 把 lang.js 文件拷贝到 grafana-test 目录下
-                cp -f ./$name/zh-Hans.json /tmp/zh-Hans.json
-                rm -rf ./$name/
-                git clone https://github.com/grafana/grafana.git $name
-                cp /tmp/zh-Hans.json ./$name/public/locales/zh-Hans/grafana.json
-              continue
+              cp -f ./$name/zh-Hans.json /tmp/zh-Hans.json
+              rm -rf ./$name/
+              git clone https://github.com/grafana/grafana.git $name
+              cp /tmp/zh-Hans.json ./$name/public/locales/zh-Hans/grafana.json
             fi
 
             if [ -e "$name/Dockerfile" ]; then
