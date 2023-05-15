@@ -40,6 +40,8 @@ jobs:
               continue
             fi
           
+            echo "Building $name"
+          
             if [ "$name" = "grafana-test" ]; then
               # 把 lang.js 文件拷贝到 grafana-test 目录下
                 cp -f ./$name/zh-Hans.json /tmp/zh-Hans.json
