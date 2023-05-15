@@ -48,6 +48,7 @@ jobs:
               git clone -b v9.5.2 https://github.com/grafana/grafana.git $name
               cp /tmp/zh-Hans.json ./$name/public/locales/zh-Hans/grafana.json
               docker buildx create --name mybuilder --driver docker-container
+              docker buildx use mybuilder
               docker buildx build --platform linux/arm,linux/arm64,linux/amd64 -t $REGISTRY/$GITHUB_REPOSITORY:$name --push ./$name/
               continue
             fi
