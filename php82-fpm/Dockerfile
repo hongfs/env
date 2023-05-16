@@ -11,6 +11,7 @@ RUN apt-get update && \
     mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
     pecl install redis-5.3.7 && \
     pecl install imagick-3.7.0 && \
+    pecl install yaconf-1.1.2 && \
     docker-php-ext-install pdo pdo_mysql mysqli gd zip bcmath opcache && \
     docker-php-ext-enable mysqli gd redis imagick
 
