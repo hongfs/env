@@ -1,0 +1,42 @@
+name: Build KubeKey
+
+on:
+  push:
+    paths:
+      - ".github/workflows/BuildKubeKey.yml"
+
+env:
+  version: 3.0.7
+
+jobs:
+  build-tdesign:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          repository: kubesphere/kubekey
+          ref: ${{ env.version }}
+
+      - name: Build
+        run: |
+          cd $GITHUB_WORKSPACE
+          sed -i 's+https://github.com/+https://hongfs-cdn.oss-cn-shenzhen-internal.aliyuncs.com/github.com/+' ./cmd/kk/pkg/files/file.go
+          sed -i 's+https://storage.googleapis.com/+https://hongfs-cdn.oss-cn-shenzhen-internal.aliyuncs.com/external/storage.googleapis.com/+' ./cmd/kk/pkg/files/file.go
+          sed -i 's+https://get.helm.sh/+https://hongfs-cdn.oss-cn-shenzhen-internal.aliyuncs.com/external/get.helm.sh/+' ./cmd/kk/pkg/files/file.go
+          sed -i 's+https://download.docker.com/+https://hongfs-cdn.oss-cn-shenzhen-internal.aliyuncs.com/external/download.docker.com/+' ./cmd/kk/pkg/files/file.go
+
+          make kk
+          chmod +x ./bin/kk
+      - uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          omitBody: true
+          artifacts: ./bin/kk
+          tag: kubekey-${{ env.version }}-kk
