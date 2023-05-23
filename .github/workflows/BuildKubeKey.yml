@@ -6,7 +6,7 @@ on:
       - ".github/workflows/BuildKubeKey.yml"
 
 env:
-  version: 3.0.7
+  version: v3.0.7
 
 jobs:
   build-tdesign:
