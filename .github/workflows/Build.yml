@@ -47,6 +47,7 @@ jobs:
               rm -rf ./$name/
               git clone -b v9.5.2 https://github.com/grafana/grafana.git $name
               cp /tmp/zh-Hans.json ./$name/public/locales/zh-Hans/grafana.json
+              sed -i "s+//raw.githubusercontent.com+//ghproxy.com/https://raw.githubusercontent.com+" ./$name/pkg/services/updatechecker/grafana.go
               docker buildx create --name mybuilder --driver docker-container
               docker buildx use mybuilder
               docker buildx build --platform linux/amd64 -t $REGISTRY/$GITHUB_REPOSITORY:$name --push ./$name/
