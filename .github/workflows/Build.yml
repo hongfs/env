@@ -50,7 +50,7 @@ jobs:
               sed -i "s+//raw.githubusercontent.com+//ghproxy.com/https://raw.githubusercontent.com+" ./$name/pkg/services/updatechecker/grafana.go
               docker buildx create --name mybuilder --driver docker-container
               docker buildx use mybuilder
-              docker buildx build --platform=linux/amd64,linux/arm64,linux/arm/v7 -t $REGISTRY/$GITHUB_REPOSITORY:$name --push ./$name/
+              docker buildx build --platform=linux/amd64 -t $REGISTRY/$GITHUB_REPOSITORY:$name --push ./$name/
               continue
             fi
 
