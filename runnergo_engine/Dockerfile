@@ -14,7 +14,7 @@ COPY --from=github /code/ /code/
 
 RUN go mod tidy && \
     env GOOS=$TARGETOS GOARCH=$TARGETARCH go build -o main main.go && \
-    echo "1"
+    echo "2"
 
 FROM --platform=$TARGETPLATFORM alpine:3.7 as run
 
