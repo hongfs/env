@@ -54,7 +54,7 @@ jobs:
               continue
             fi
 
-            if [[ "$name" = "runnergo_*" ]]; then
+            if [[ "$name" == "runnergo_*" ]]; then
               docker buildx create --name builder_$name --driver docker-container
               docker buildx use builder_$name
               docker buildx build --platform=linux/amd64,linux/arm64 -t $REGISTRY/$GITHUB_REPOSITORY:$name --push ./$name/
