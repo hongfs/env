@@ -9,10 +9,17 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
+    # 关闭 PHP 版本的显示
     sed -i "s+expose_php = On+expose_php = Off+" "$PHP_INI_DIR/php.ini" && \
+    # 关闭 GC，如果涉及到队列那可能会存在问题
     sed -i "s+zend.enable_gc = On+zend.enable_gc = Off+" "$PHP_INI_DIR/php.ini" && \
+    # 序列化浮点数时存储的有效数字的位数。
+    sed -i "s+serialize_precision = -1+serialize_precision = 14+" "$PHP_INI_DIR/php.ini" && \
+    # 默认上海时区
     sed -i "s+;date.timezone =+date.timezone =Asia/Shanghai+" "$PHP_INI_DIR/php.ini" && \
+    # BC 的小数点默认 2 位
     sed -i "s+bcmath.scale = 0+bcmath.scale = 2+" "$PHP_INI_DIR/php.ini" && \
+    # 关闭 cookice
     sed -i "s+session.use_cookies = 1+session.use_cookies = 0+" "$PHP_INI_DIR/php.ini" && \
     sed -i "s+session.use_only_cookies = 1+session.use_only_cookies = 0+" "$PHP_INI_DIR/php.ini" && \
     pecl install redis-5.3.7 && \
