@@ -4,7 +4,9 @@ FROM library/php:8.2.5-fpm as php
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
-RUN apt-get update && \
+RUN pwd && \
+    mkdir -p /tmp/opcache && \
+    apt-get update && \
     apt-get install -y git zip libpng-dev libzip-dev libmagickwand-dev iproute2 procps cron vim gdb && \
     rm -rf /var/lib/apt/lists/* && \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
@@ -40,6 +42,7 @@ opcache.max_wasted_percentage=10\n\
 opcache.max_file_size=0\n\
 opcache.consistency_checks=0\n\
 opcache.file_update_protection=0\n\
+opcache.file_cache=/tmp/opcache\n\
 opcache.file_cache_only=1\n\
 opcache.file_cache_consistency_checks=1\n\
 opcache.jit=function\n\
