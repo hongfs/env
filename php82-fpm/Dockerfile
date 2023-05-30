@@ -42,10 +42,6 @@ opcache.max_wasted_percentage=10\n\
 opcache.max_file_size=0\n\
 opcache.consistency_checks=0\n\
 opcache.file_update_protection=0\n\
-opcache.file_cache=/tmp/opcache\n\
-opcache.file_cache_only=1\n\
-opcache.file_cache_consistency_checks=1\n\
-opcache.jit=function\n\
 opcache.validate_timestamps=0\n\
 opcache.enable_file_override=0" > /usr/local/etc/php/conf.d/opcache.ini
 
