@@ -9,6 +9,12 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
+    sed -i "s+expose_php = On+expose_php = Off+" "$PHP_INI_DIR/php.ini" && \
+    sed -i "s+zend.enable_gc = On+zend.enable_gc = Off+" "$PHP_INI_DIR/php.ini" && \
+    sed -i "s+;date.timezone =+date.timezone =Asia/Shanghai+" "$PHP_INI_DIR/php.ini" && \
+    sed -i "s+bcmath.scale = 0+bcmath.scale = 2+" "$PHP_INI_DIR/php.ini" && \
+    sed -i "s+session.use_cookies = 1+session.use_cookies = 0+" "$PHP_INI_DIR/php.ini" && \
+    sed -i "s+session.use_only_cookies = 1+session.use_only_cookies = 0+" "$PHP_INI_DIR/php.ini" && \
     pecl install redis-5.3.7 && \
     pecl install imagick-3.7.0 && \
     pecl install yaconf-1.1.2 && \
