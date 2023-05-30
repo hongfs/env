@@ -50,4 +50,4 @@ opcache.enable_file_override=0" > /usr/local/etc/php/conf.d/opcache.ini
 RUN echo "\n\
 pm = static\n\
 pm.max_children = 20\n\
-pm.max_requests = 50000" >> /usr/local/etc/php-fpm.d/zz-docker.conf
+pm.max_requests = 10000" >> /usr/local/etc/php-fpm.d/zz-docker.conf
