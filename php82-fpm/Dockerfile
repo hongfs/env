@@ -2,6 +2,8 @@ FROM library/composer:2.5.7 as composer
 
 FROM library/php:8.2.5-fpm as php
 
+LABEL org.opencontainers.image.description 加个描述看看
+
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN pwd && \
