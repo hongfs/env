@@ -1,5 +1,7 @@
 FROM library/composer:2.5.7 as composer
 
+LABEL org.opencontainers.image.source="https://github.com/hongfs/env"
+
 FROM library/php:8.2.5-fpm as php
 
 LABEL org.opencontainers.image.description 加个描述看看
