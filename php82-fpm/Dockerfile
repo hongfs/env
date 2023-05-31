@@ -1,10 +1,9 @@
 FROM library/composer:2.5.7 as composer
 
-LABEL org.opencontainers.image.source="https://github.com/hongfs/env/tree/main/php82-fpm"
-
 FROM library/php:8.2.5-fpm as php
 
-LABEL org.opencontainers.image.description 加个描述看看
+LABEL org.opencontainers.image.source="https://github.com/hongfs/env/tree/main/php82-fpm"
+LABEL org.opencontainers.image.description "PHP 线上环境，已安装 opcache redis imagick"
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
