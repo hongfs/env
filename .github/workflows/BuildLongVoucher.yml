@@ -27,7 +27,8 @@ jobs:
       - name: Build
         run: |
           cd $GITHUB_WORKSPACE
+          rm -rf package-lock.json node_modules
           yarn install
-          yarn add @nomiclabs/hardhat-ethers@^2.0.0
+          yarn add @nomiclabs/hardhat-ethers@^2.0.0 chai@^4.2.0
           npx hardhat compile
           ls -l
