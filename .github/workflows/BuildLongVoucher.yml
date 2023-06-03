@@ -1,0 +1,32 @@
+name: Build Long Voucher
+
+on:
+  push:
+    paths:
+      - ".github/workflows/BuildLongVoucher.yml"
+
+env:
+  commit: 5893d2ae73ff4fbdcff630e6149b5cb2bd6b0519
+
+jobs:
+  build-tdesign:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          repository: longfil/long-voucher
+          ref: ${{ env.commit }}
+
+      - name: Build
+        run: |
+          cd $GITHUB_WORKSPACE
+          yarn install
+          npx hardhat compile
+          ls -l
