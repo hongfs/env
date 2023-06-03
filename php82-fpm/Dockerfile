@@ -1,6 +1,6 @@
 FROM library/composer:2.5.7 as composer
 
-FROM library/php:8.2.5-fpm as php
+FROM library/php:8.2.6-fpm as php
 
 LABEL org.opencontainers.image.source="https://github.com/hongfs/env/tree/main/php82-fpm"
 LABEL org.opencontainers.image.description "PHP 线上环境，已安装 opcache redis imagick"
