@@ -28,6 +28,6 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           yarn install
-          yarn add --save-dev "@nomiclabs/hardhat-ethers@^2.0.0"
+          yarn add @nomiclabs/hardhat-ethers@^2.0.0
           npx hardhat compile
           ls -l
