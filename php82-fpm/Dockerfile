@@ -1,4 +1,4 @@
-FROM library/composer:2.5.7 as composer
+FROM library/composer:2.5.8 as composer
 
 FROM library/php:8.2.6-fpm as php
 
