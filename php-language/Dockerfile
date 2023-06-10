@@ -6,6 +6,4 @@ COPY index.php /code/index.php
 
 RUN composer require phpoffice/phpspreadsheet -vvv
 
-CMD [ "php" ]
-
-ENTRYPOINT [ "index.php" ]
+CMD [ "php", "index.php" ]
