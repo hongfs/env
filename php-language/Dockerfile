@@ -5,5 +5,3 @@ WORKDIR /code/
 COPY index.php /code/index.php
 
 RUN composer require phpoffice/phpspreadsheet -vvv
-
-CMD [ "php", "index.php" ]
