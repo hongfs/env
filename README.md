@@ -11,3 +11,11 @@ docker pull ghcr.io/hongfs/env:php79-cli
 docker pull ghcr.io/hongfs/env:php-language
 docker pull ghcr.io/hongfs/env:acme.sh
 ```
+
+## 翻译生成
+
+```shell
+$ docker run --rm -it -v ~/lang:/data/ ghcr.io/hongfs/env:php-language
+```
+
+你需要将 `data.xlsx` 挂载到 `/data/data.xlsx` 下。
