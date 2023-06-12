@@ -16,7 +16,9 @@ func main() {
 			return
 		}
 
-		fmt.Fprint(w, "success")
+		name, _ := os.Hostname()
+
+		fmt.Fprintf(w, "[%s]%s", name, "version-1")
 	})
 
 	srv := http.Server{
