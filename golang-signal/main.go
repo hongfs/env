@@ -18,7 +18,7 @@ func main() {
 
 		name, _ := os.Hostname()
 
-		fmt.Fprintf(w, "[%s]%s", name, "version-1")
+		fmt.Fprintf(w, "[%s]%s", name, "version-2")
 	})
 
 	srv := http.Server{
