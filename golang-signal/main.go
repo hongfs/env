@@ -11,7 +11,12 @@ import (
 
 func main() {
 	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, "1")
+		if r.URL.Path == "/heart" {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+
+		fmt.Fprint(w, "success")
 	})
 
 	srv := http.Server{
