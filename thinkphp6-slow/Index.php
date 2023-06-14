@@ -26,7 +26,7 @@ class Index extends BaseController
         }
 
         $data['goods'] = Db::table('orderdetails')
-            ->where('orderNumber', $data['id'])
+            ->where('orderNumber', $data['orderNumber'])
             ->select();
 
         return $data;
