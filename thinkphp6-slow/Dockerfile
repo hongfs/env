@@ -12,4 +12,4 @@ COPY --from=base /code/tp /code
 
 EXPOSE 8080
 
-CMD ["php", "think", "run", "-p=8080"]
+CMD ["sh", "-c", "php think run -port=8080"]
