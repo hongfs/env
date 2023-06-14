@@ -9,8 +9,9 @@ FROM ghcr.io/hongfs/env:php82-cli
 WORKDIR /code
 
 COPY --from=base /code/tp /code
-COPY database.php /code/config/database.php
-COPY Index.php /code/app/controller/Index.php
+COPY app.php config/app.php
+COPY database.php config/database.php
+COPY Index.php app/controller/Index.php
 
 EXPOSE 8000
 
