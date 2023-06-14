@@ -8,5 +8,8 @@ RUN apk update && \
     apk add perl perl-dbd-mysql && \
     apk add --virtual=build make && \
     tar -xzf /tmp/code.tar.gz -C /code --strip-components=1 && \
-    cd /code && \
+    rm -rf && /tmp/code.tar.gz && \
+    perl Makefile.PL && \
+    make && \
+    make install && \
     ls -l
