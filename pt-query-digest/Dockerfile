@@ -13,8 +13,8 @@ WORKDIR /code
 COPY --from=base /code /code
 
 RUN apk update && \
-    apk add perl perl-dbd-mysql && \
-    apk add --virtual=build make && \
+    apk add --no-cache perl perl-dbd-mysql make && \
+    rm -rf /var/cache/apk/* && \
     perl Makefile.PL && \
     make && \
     make install && \
