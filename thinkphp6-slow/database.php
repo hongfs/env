@@ -24,7 +24,7 @@ return [
             // 数据库类型
             'type'            => env('database.type', 'mysql'),
             // 服务器地址
-            'hostname'        => 'mysql',
+            'hostname'        => getenv('MYSQL_HOST'),
             // 数据库名
             'database'        => 'classicmodels',
             // 用户名
