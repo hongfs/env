@@ -18,6 +18,6 @@ RUN apk update && \
     perl Makefile.PL && \
     make && \
     make install && \
-    ls -l
+    rm -rf ./
 
 ENTRYPOINT ["pt-query-digest"]
