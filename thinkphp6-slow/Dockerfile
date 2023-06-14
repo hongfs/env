@@ -10,6 +10,6 @@ WORKDIR /code
 
 COPY --from=base /code/tp /code
 
-EXPOSE 8080
+EXPOSE 8000
 
-CMD ["sh", "-c", "php think run -port=8080"]
+CMD ["sh", "-c", "php think run"]
