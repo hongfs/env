@@ -1,7 +1,7 @@
 <?php
 namespace app\controller;
 
-use think\Db;
+use think\facade\Db;
 use app\BaseController;
 
 class Index extends BaseController
