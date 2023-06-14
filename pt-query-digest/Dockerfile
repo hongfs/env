@@ -8,6 +8,8 @@ RUN tar -xzf /tmp/code.tar.gz -C /code --strip-components=1
 
 FROM ghcr.io/hongfs/env:alpine-debug
 
+WORKDIR /code
+
 COPY --from=base /code /code
 
 RUN apk update && \
