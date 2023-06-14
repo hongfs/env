@@ -10,5 +10,6 @@ RUN apt-get update && \
     mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
     pecl install redis && \
     docker-php-ext-install pdo pdo_mysql mysqli gd zip bcmath && \
-    docker-php-ext-enable mysqli gd redis
+    docker-php-ext-enable mysqli gd redis && \
+    echo "1"
 
