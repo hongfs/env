@@ -21,7 +21,15 @@ async function fetch(r) {
     // 429: 限流
     // 500：服务器错误
 
-    return result.status;
+    const status = result.status;
+
+    if(status == 429) {
+        r.status(429);
+        return;
+    }
+
+    // return result.status;
+    return;
 }
 
 export default {
