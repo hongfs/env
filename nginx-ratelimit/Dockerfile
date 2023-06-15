@@ -9,4 +9,7 @@ RUN apt-get update && \
     apt-get install -y iproute2 curl tzdata ca-certificates openssl && \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     rm -rf /var/lib/apt/lists/* && \
+    mkdir -p /usr/local/share/ca-certificates/ && \
+    curl -sL https://curl.se/ca/cacert.pem -o /usr/local/share/ca-certificates/cacert.pem && \
+    update-ca-certificates && \
     sed -i '4i load_module modules/ngx_http_js_module.so;' /etc/nginx/nginx.conf
