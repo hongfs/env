@@ -5,13 +5,13 @@ async function fetch(r) {
         'X-Ratelimit-IP': r.remoteAddress,
     };
 
-    for (h in r.headersIn) {
+    for (let h in r.headersIn) {
         headers['X-Header-' + h] = r.headersIn[h];
     }
 
     let result = await ngx.fetch('https://ratelimit.hongfs.cn/', {
         method: r.method,
-        headers,
+        headers: headers,
         verify: true,
     });
 
