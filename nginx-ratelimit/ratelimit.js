@@ -24,7 +24,8 @@ async function fetch(r) {
     const status = result.status;
 
     if(status == 429) {
-        r.status(429);
+        r.return(429);
+        r.finish();
         return;
     }
 
