@@ -28,7 +28,7 @@ async function fetch(r) {
     }
 
     // return result.status;
-    return;
+    return r.return(429);
 }
 
 export default {
