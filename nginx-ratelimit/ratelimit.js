@@ -1,11 +1,13 @@
 async function fetch(r) {
+    var h;
+
     let headers = {
         'X-Ratelimit-Host': r.headersIn.host,
         'X-Ratelimit-Uri': r.uri,
         'X-Ratelimit-IP': r.remoteAddress,
     };
 
-    for (let h in r.headersIn) {
+    for (h in r.headersIn) {
         headers['X-Header-' + h] = r.headersIn[h];
     }
 
