@@ -25,10 +25,6 @@ async function fetch(r) {
 
     r.log('ratelimit: ' + status);
 
-    if (status === 200) {
-        return r.return(result.status);
-    }
-
     r.status = status;
     r.send(status);
     r.finish();
