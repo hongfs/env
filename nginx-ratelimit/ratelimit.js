@@ -21,9 +21,7 @@ async function fetch(r) {
     // 429: 限流
     // 500：服务器错误
 
-    const status = result.status;
-
-    return r.return(429, 'hongfs-' + status);
+    return r.return(result.status);
 }
 
 export default {
