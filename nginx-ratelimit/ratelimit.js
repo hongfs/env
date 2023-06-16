@@ -14,6 +14,7 @@ async function fetch(r) {
     let result = await ngx.fetch('https://ratelimit.hongfs.cn/', {
         method: r.method,
         headers: headers,
+        verify: false,
     });
 
     // 200: 可以访问
