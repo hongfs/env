@@ -24,7 +24,7 @@ async function fetch(r) {
     const status = result.status;
 
     if(status === 429) {
-        return r.return(429, 'Too Many Requests');
+        return r.return(status);
     }
 
     const backend_reply = await  r.subrequest('/backend' + r.uri, {
@@ -32,11 +32,7 @@ async function fetch(r) {
         body: r.requestBody,
     });
 
-    if(backend_reply.status !== 200) {
-        return r.return(backend_reply.status);
-    }
-
-    r.return(backend_reply.status, backend_reply.responseBody);
+    return r.return(backend_reply.status, backend_reply.responseBody);
 }
 
 export default {
