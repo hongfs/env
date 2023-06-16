@@ -23,11 +23,7 @@ async function fetch(r) {
 
     const status = result.status;
 
-    if(status == 429) {
-        return r.return(429, 'hongfs-429');
-    }
-
-    // return result.status;
+    return r.return(429, 'hongfs-' + status);
 }
 
 export default {
