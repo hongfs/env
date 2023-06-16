@@ -32,6 +32,10 @@ async function fetch(r) {
         body: r.requestBody,
     });
 
+    if(backend_reply.status !== 200) {
+        return r.result(backend_reply.status);
+    }
+
     r.return(backend_reply.status, backend_reply.responseBody);
 }
 
