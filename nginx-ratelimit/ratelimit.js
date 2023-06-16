@@ -21,7 +21,7 @@ async function fetch(r) {
     // 429: 限流
     // 500：服务器错误
 
-    return r.return(result.status);
+    return r.return(429 || result.status);
 }
 
 export default {
