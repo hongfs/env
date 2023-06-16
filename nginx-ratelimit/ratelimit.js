@@ -30,7 +30,6 @@ async function fetch(r) {
     r.subrequest('/backend' + r.uri, {
         method: r.method,
         body: r.requestBody,
-        args: r.args,
     }).then(reply => {
         r.return(reply.status, reply.responseBody);
     }).catch(err => {
