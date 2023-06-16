@@ -1,4 +1,4 @@
-FROM debian:stable-20230612 as base
+FROM ubuntu:22.04 as base
 
 RUN apt-get update && \
     apt-get install -y ca-certificates && \
@@ -9,6 +9,7 @@ FROM nginx:1.23.4
 WORKDIR /web
 
 COPY templates.conf /etc/nginx/conf.d/default.conf
+
 COPY ratelimit.js /etc/nginx/ratelimit.js
 
 RUN apt-get update && \
