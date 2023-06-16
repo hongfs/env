@@ -28,7 +28,6 @@ async function fetch(r) {
     }
 
     // return result.status;
-    return r.return(429, 'hongfs');
 }
 
 export default {
