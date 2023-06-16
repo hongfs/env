@@ -21,6 +21,8 @@ async function fetch(r) {
     // 429: 限流
     // 500：服务器错误
 
+    r.variables['ratelimit_status'] = result.status;
+
     return r.return(result.status);
 }
 
