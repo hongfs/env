@@ -27,14 +27,12 @@ async function fetch(r) {
         return r.result(429, 'Too Many Requests');
     }
 
-    r.subrequest('/backend' + r.uri, {
+    const backend_reply = await  r.subrequest('/backend' + r.uri, {
         method: r.method,
         body: r.requestBody,
-    }).then(reply => {
-        r.return(reply.status, reply.responseBody);
-    }).catch(err => {
-        r.return(500, err);
     });
+
+    r.return(backend_reply.status, backend_reply.responseBody);
 }
 
 export default {
