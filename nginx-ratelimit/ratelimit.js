@@ -23,11 +23,19 @@ async function fetch(r) {
 
     const status = result.status;
 
-    r.log('ratelimit: ' + status);
+    if(status === 429) {
+        return r.result(429, 'Too Many Requests');
+    }
 
-    r.status = status;
-    r.send(status);
-    r.finish();
+    r.subrequest('/backend' + r.uri, {
+        method: r.method,
+        body: r.requestBody,
+        args: r.args,
+    }).then(reply => {
+        r.return(reply.status, reply.responseBody);
+    }).catch(err => {
+        r.return(500, err);
+    });
 }
 
 export default {
