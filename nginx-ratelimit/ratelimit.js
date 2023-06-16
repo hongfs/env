@@ -23,6 +23,8 @@ async function fetch(r) {
 
     const status = result.status;
 
+    r.log('ratelimit: ' + status);
+
     if (status === 200) {
         return r.return(result.status);
     }
@@ -30,7 +32,6 @@ async function fetch(r) {
     r.status = status;
     r.send(status);
     r.finish();
-    return;
 }
 
 export default {
