@@ -1,4 +1,4 @@
-FROM nginx:1.23.4
+FROM openresty/openresty:1.21.4.1-0-jammy
 
 WORKDIR /web
 
