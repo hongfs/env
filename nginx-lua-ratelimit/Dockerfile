@@ -4,16 +4,33 @@ WORKDIR /nginx
 
 RUN apk update && \
     apk add --no-cache git curl unzip gcc libc-dev make openssl-dev perl-dev pcre2-dev zlib-dev linux-headers libxslt-dev gd-dev geoip-dev libedit-dev bash alpine-sdk findutils ca-certificates gettext && \
+    apk add \
+        build-base \
+        coreutils \
+        curl \
+        gd-dev \
+        geoip-dev \
+        libxslt-dev \
+        linux-headers \
+        make \
+        perl-dev \
+        gd \
+        geoip \
+        libgcc \
+        libxslt \
+        zlib \
+        readline-dev \
+        zlib-dev && \
     cd && \
     git clone https://github.com/nginx/njs && \
     cd njs && \
     ./configure && \
     make njs && \
-    git clone -b pcre2-10.42 https://github.com/PCRE2Project/pcre2 && \
-    cd pcre2 && \
-    ./configure && \
-    make && \
-    make install && \
+    # git clone -b pcre2-10.42 https://github.com/PCRE2Project/pcre2 && \
+    # cd pcre2 && \
+    # ./configure && \
+    # make && \
+    # make install && \
     cd && \
     git clone https://github.com/vozlt/nginx-module-vts && \
     git clone -b v0.3.2 https://github.com/vision5/ngx_devel_kit && \
