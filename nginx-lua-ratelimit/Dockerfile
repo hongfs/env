@@ -3,15 +3,14 @@ FROM alpine
 WORKDIR /nginx
 
 RUN apk update && \
-    apk add --no-cache git curl gcc libc-dev make openssl-dev perl-dev pcre2-dev zlib-dev linux-headers libxslt-dev gd-dev geoip-dev libedit-dev bash alpine-sdk findutils ca-certificates gettext && \
+    apk add --no-cache git curl unzip gcc libc-dev make openssl-dev perl-dev pcre2-dev zlib-dev linux-headers libxslt-dev gd-dev geoip-dev libedit-dev bash alpine-sdk findutils ca-certificates gettext && \
     cd && \
     git clone https://github.com/nginx/njs && \
     cd njs && \
     ./configure && \
     make njs && \
-    curl https://github.com/PCRE2Project/pcre2/archive/refs/tags/pcre2-10.42.zip -o pcre2.zip && \
-    unzip pcre2.zip && \
-    cd pcre2-pcre2-10.42 && \
+    git clone -b pcre2-10.42 https://github.com/PCRE2Project/pcre2 && \
+    cd pcre2 && \
     ./configure && \
     make && \
     make install && \
