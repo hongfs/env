@@ -54,7 +54,8 @@ RUN apk update && \
         --with-http_sub_module \
         --with-http_v2_module \
         --with-cc-opt='-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC' \
-        --with-ld-opt='-Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie,-Wl,-rpath,/nginx/luajit2' \
+        --with-ld-opt='-Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie' \
+        --with-ld-opt='-Wl,-rpath,/nginx/luajit2/src' \
         --add-module=$HOME/nginx-module-vts \
         --add-module=$HOME/ngx_devel_kit \
         --add-module=$HOME/lua-nginx-module \
