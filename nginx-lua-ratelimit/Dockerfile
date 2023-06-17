@@ -3,12 +3,18 @@ FROM alpine
 WORKDIR /nginx
 
 RUN apk update && \
-    apk add --no-cache git curl gcc libc-dev make openssl-dev perl-dev pcre* pcre2-dev zlib-dev linux-headers libxslt-dev gd-dev geoip-dev libedit-dev bash alpine-sdk findutils ca-certificates gettext && \
+    apk add --no-cache git curl gcc libc-dev make openssl-dev perl-dev pcre2-dev zlib-dev linux-headers libxslt-dev gd-dev geoip-dev libedit-dev bash alpine-sdk findutils ca-certificates gettext && \
     cd && \
     git clone https://github.com/nginx/njs && \
     cd njs && \
     ./configure && \
     make njs && \
+    curl https://github.com/PCRE2Project/pcre2/archive/refs/tags/pcre2-10.42.tar.gz -o pcre2.tar.gz && \
+    tar -zxvf pcre2.tar.gz && \
+    cd pcre2-pcre2-10.42 && \
+    ./configure && \
+    make && \
+    make install && \
     cd && \
     git clone https://github.com/vozlt/nginx-module-vts && \
     git clone -b v0.3.2 https://github.com/vision5/ngx_devel_kit && \
