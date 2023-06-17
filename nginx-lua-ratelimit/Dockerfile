@@ -1,5 +1,7 @@
 FROM alpine
 
+WORKDIR /nginx
+
 RUN apk update && \
     apk add --no-cache git curl gcc libc-dev make openssl-dev pcre2-dev zlib-dev linux-headers libxslt-dev gd-dev geoip-dev libedit-dev bash alpine-sdk findutils ca-certificates gettext && \
     cd && \
@@ -7,7 +9,7 @@ RUN apk update && \
     cd njs && \
     ./configure && \
     make njs && \
-    cd ../ && \
+    cd && \
     git clone https://github.com/vozlt/nginx-module-vts && \
     git clone -b v0.3.2 https://github.com/vision5/ngx_devel_kit && \
     git clone -b v0.10.24 https://github.com/openresty/lua-nginx-module && \
@@ -52,7 +54,7 @@ RUN apk update && \
         --with-http_sub_module \
         --with-http_v2_module \
         --with-cc-opt='-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC' \
-        --with-ld-opt='-Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie,-rpath,$HOME/luajit/lib' \
+        --with-ld-opt='-Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie,-rpath,$HOME/luajit2/lib' \
         --add-module=$HOME/nginx-module-vts \
         --add-module=$HOME/ngx_devel_kit \
         --add-module=$HOME/lua-nginx-module \
