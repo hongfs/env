@@ -13,6 +13,7 @@ RUN apk update && \
         libxslt-dev \
         linux-headers \
         make \
+        pcre \
         perl-dev \
         gd \
         geoip \
