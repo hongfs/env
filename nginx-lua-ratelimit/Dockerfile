@@ -14,6 +14,10 @@ RUN apk update && \
     git clone -b v0.3.2 https://github.com/vision5/ngx_devel_kit && \
     git clone -b v0.10.24 https://github.com/openresty/lua-nginx-module && \
     git clone -b v0.1.26 https://github.com/openresty/lua-resty-core && \
+    cd lua-resty-core && \
+    make && \
+    make install && \
+    cd && \
     git clone -b v0.13 https://github.com/openresty/lua-resty-lrucache && \
     git clone -b v2.1-20230410 https://github.com/openresty/luajit2 && \
     cd luajit2 && \
@@ -61,7 +65,7 @@ RUN apk update && \
         --with-http_v2_module \
         --with-cc-opt='-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC' \
         --with-ld-opt='-Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie' \
-        --with-ld-opt='-Wl,-rpath,/usr/local/luajit/lib' \
+        --with-ld-opt='-Wl,-rpath,/usr/local/luajit2/lib' \
         --add-module=$HOME/nginx-module-vts \
         --add-module=$HOME/ngx_devel_kit \
         --add-module=$HOME/lua-nginx-module \
