@@ -2,6 +2,9 @@ FROM alpine
 
 WORKDIR /nginx
 
+ENV LUAJIT_LIB=/usr/local/luajit/lib
+ENV LUAJIT_INC=/usr/local/luajit/include/luajit-2.1
+
 RUN apk update && \
     apk add --no-cache git curl gcc libc-dev make openssl-dev pcre2-dev zlib-dev linux-headers libxslt-dev gd-dev geoip-dev libedit-dev bash alpine-sdk findutils ca-certificates gettext && \
     cd && \
@@ -16,6 +19,10 @@ RUN apk update && \
     git clone -b v0.1.26 https://github.com/openresty/lua-resty-core && \
     git clone -b v0.13 https://github.com/openresty/lua-resty-lrucache && \
     git clone -b v2.1-20230410 https://github.com/openresty/luajit2 && \
+    cd luajit2 && \
+    make && \
+    make install && \
+    cd && \
     curl https://nginx.org/download/nginx-1.23.4.tar.gz -o nginx.tar.gz && \
     tar -zxvf nginx.tar.gz && \
     cd nginx-1.23.4 && \
@@ -55,7 +62,7 @@ RUN apk update && \
         --with-http_v2_module \
         --with-cc-opt='-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC' \
         --with-ld-opt='-Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie' \
-        --with-ld-opt='-Wl,-rpath,/nginx/luajit2/src' \
+        --with-ld-opt='-Wl,-rpath,/usr/local/luajit/lib' \
         --add-module=$HOME/nginx-module-vts \
         --add-module=$HOME/ngx_devel_kit \
         --add-module=$HOME/lua-nginx-module \
