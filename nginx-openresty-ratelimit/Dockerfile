@@ -8,6 +8,5 @@ RUN apk update && \
     cd /etc/nginx/lua && \
     git clone https://github.com/timebug/lua-resty-redis-ratelimit && \
     git clone https://github.com/openresty/lua-resty-redis && \
-    git clone https://github.com/openresty/lua-resty-limit-traffic && \
     cd && \
     rm -rf /var/cache/apk
