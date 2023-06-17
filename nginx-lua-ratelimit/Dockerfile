@@ -13,7 +13,6 @@ RUN apk update && \
         libxslt-dev \
         linux-headers \
         make \
-        pcre \
         pcre-dev \
         perl-dev \
         gd \
