@@ -3,7 +3,7 @@ FROM alpine
 WORKDIR /nginx
 
 RUN apk update && \
-    apk add --no-cache git curl gcc libc-dev make openssl-dev libpcre3-dev pcre2-dev zlib-dev linux-headers libxslt-dev gd-dev geoip-dev libedit-dev bash alpine-sdk findutils ca-certificates gettext && \
+    apk add --no-cache git curl gcc libc-dev make openssl-dev pcre-dev pcre2-dev zlib-dev linux-headers libxslt-dev gd-dev geoip-dev libedit-dev bash alpine-sdk findutils ca-certificates gettext && \
     cd && \
     git clone https://github.com/nginx/njs && \
     cd njs && \
