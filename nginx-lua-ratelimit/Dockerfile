@@ -14,10 +14,6 @@ RUN apk update && \
     git clone -b v0.3.2 https://github.com/vision5/ngx_devel_kit && \
     git clone -b v0.10.24 https://github.com/openresty/lua-nginx-module && \
     git clone -b v0.1.26 https://github.com/openresty/lua-resty-core && \
-    cd lua-resty-core && \
-    make && \
-    make install && \
-    cd && \
     git clone -b v0.13 https://github.com/openresty/lua-resty-lrucache && \
     git clone -b v2.1-20230410 https://github.com/openresty/luajit2 && \
     cd luajit2 && \
@@ -81,14 +77,19 @@ RUN apk update && \
     mkdir -p /var/cache/nginx/fastcgi_temp && \
     mkdir -p /var/cache/nginx/uwsgi_temp && \
     mkdir -p /var/cache/nginx/scgi_temp && \
+    cd &&\
+    cd lua-resty-core && \
+    make install PREFIX=/etc/nginx && \
+    cd &&\
+    cd lua-resty-lrucache && \
+    make install PREFIX=/etc/nginx && \
+    cd &&\
     apk del git gcc make && \
     rm -rf /var/cache/apk && \
     rm -rf $HOME/nginx.tar.gz && \
     rm -rf $HOME/nginx-module-vts && \
     rm -rf $HOME/ngx_devel_kit && \
     rm -rf $HOME/lua-nginx-module && \
-    rm -rf $HOME/lua-resty-core && \
-    rm -rf $HOME/lua-resty-lrucache && \
     rm -rf $HOME/njs && \
     rm -rf $HOME/nginx-1.23.4
 
