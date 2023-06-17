@@ -9,8 +9,8 @@ RUN apk update && \
     cd njs && \
     ./configure && \
     make njs && \
-    curl https://github.com/PCRE2Project/pcre2/archive/refs/tags/pcre2-10.42.tar.gz -o pcre2.tar.gz && \
-    tar -zxvf pcre2.tar.gz && \
+    curl https://github.com/PCRE2Project/pcre2/archive/refs/tags/pcre2-10.42.zip -o pcre2.zip && \
+    unzip pcre2.zip && \
     cd pcre2-pcre2-10.42 && \
     ./configure && \
     make && \
