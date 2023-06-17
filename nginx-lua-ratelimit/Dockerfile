@@ -14,6 +14,7 @@ RUN apk update && \
         linux-headers \
         make \
         pcre-dev \
+        libpcrecpp \
         perl-dev \
         gd \
         geoip \
