@@ -15,6 +15,13 @@ RUN apk update && \
     git clone -b v0.10.24 https://github.com/openresty/lua-nginx-module && \
     git clone -b v0.1.26 https://github.com/openresty/lua-resty-core && \
     git clone -b v0.13 https://github.com/openresty/lua-resty-lrucache && \
+    git clone -b v2.1-20230410 https://github.com/openresty/luajit2 && \
+    cd luajit2 && \
+    make && \
+    make install PREFIX=/usr/local/luajit2 && \
+    export LUAJIT_LIB=/usr/local/luajit2/lib && \
+    export LUAJIT_INC=/usr/local/luajit2/include/luajit-2.1 && \
+    cd && \
     curl https://nginx.org/download/nginx-1.23.4.tar.gz -o nginx.tar.gz && \
     tar -zxvf nginx.tar.gz && \
     cd nginx-1.23.4 && \
@@ -54,6 +61,7 @@ RUN apk update && \
         --with-http_v2_module \
         --with-cc-opt='-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC' \
         --with-ld-opt='-Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie' \
+        --with-ld-opt='-Wl,-rpath,/usr/local/luajit/lib' \
         --add-module=$HOME/nginx-module-vts \
         --add-module=$HOME/ngx_devel_kit \
         --add-module=$HOME/lua-nginx-module \
