@@ -65,8 +65,6 @@ RUN apk update && \
         --add-module=$HOME/nginx-module-vts \
         --add-module=$HOME/ngx_devel_kit \
         --add-module=$HOME/lua-nginx-module \
-        --add-module=$HOME/lua-resty-core \
-        --add-module=$HOME/lua-resty-lrucache \
         --add-module=$HOME/njs/nginx && \
     make -j2 && \
     make install && \
@@ -90,7 +88,10 @@ RUN apk update && \
     rm -rf $HOME/nginx-module-vts && \
     rm -rf $HOME/ngx_devel_kit && \
     rm -rf $HOME/lua-nginx-module && \
+    rm -rf $HOME/lua-resty-core && \
+    rm -rf $HOME/lua-resty-lrucache && \
     rm -rf $HOME/njs && \
+    rm -rf $HOME/luajit2 && \
     rm -rf $HOME/nginx-1.23.4
 
 COPY default.conf /etc/nginx/conf.d/default.conf
