@@ -5,7 +5,7 @@ WORKDIR /web
 COPY default.conf /etc/nginx/conf.d/default.conf
 
 RUN apt-get update && \
-    apt-get install -y iproute2 curl tzdata ca-certificates openssl && \
+    apt-get install -y iproute2 curl tzdata ca-certificates openssl git && \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     mkdir -p /etc/nginx/lua/ && \
     cd /etc/nginx/lua/ && \
