@@ -24,6 +24,16 @@ func main() {
 		fmt.Fprint(w, "{\"code\":1}")
 	})
 
+	http.HandleFunc("/output", func(w http.ResponseWriter, r *http.Request) {
+		log.Println("接收到一个请求")
+
+		for k, v := range r.Header {
+			fmt.Println(k, v)
+		}
+
+		fmt.Fprint(w, "{\"code\":1}")
+	})
+
 	http.HandleFunc("/hostname", func(w http.ResponseWriter, r *http.Request) {
 		if Hostname == "" {
 			fmt.Fprint(w, "无法获取主机名")
