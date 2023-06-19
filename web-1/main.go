@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"runtime"
@@ -28,7 +29,7 @@ func main() {
 		log.Println("接收到一个请求")
 
 		for k, v := range r.Header {
-			fmt.Println(k, v)
+			log.Println(k, v)
 		}
 
 		fmt.Fprint(w, "{\"code\":1}")
