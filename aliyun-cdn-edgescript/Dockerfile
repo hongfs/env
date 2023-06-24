@@ -15,3 +15,5 @@ FROM python:2.7.12-alpine
 WORKDIR /code
 
 COPY --from=download /code/ /code/
+
+# docker run --rm -it --name edgescript ghcr.io/hongfs/env:aliyun-cdn-edgescript python es.py help
