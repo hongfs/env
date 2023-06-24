@@ -15,7 +15,3 @@ FROM python:2.7.12-alpine
 WORKDIR /code
 
 COPY --from=download /code/ /code/
-
-ENTRYPOINT [ "es.py" ]
-
-CMD [ "python" ]
