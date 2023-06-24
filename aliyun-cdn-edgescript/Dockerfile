@@ -8,7 +8,7 @@ RUN apt-get update && \
     cd /tmp/ && \
     unzip /tmp/edgescript.zip && \
     ls -l && \
-    cp -r /tmp/openapi-es-tools-master-b7a3ee97c5d23b5885d8e0ed5fa674b10f83d9e5/cdn-api/ /code/
+    cp -r /tmp/openapi-es-tools-master-b7a3ee97c5d23b5885d8e0ed5fa674b10f83d9e5/cdn-api/* /code/
 
 FROM python:3.7-alpine
 
