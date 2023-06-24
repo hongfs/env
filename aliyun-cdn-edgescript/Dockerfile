@@ -16,4 +16,6 @@ WORKDIR /code
 
 COPY --from=download /code/ /code/
 
-CMD [ "python", "./es.py" ]
+ENTRYPOINT [ "es.py" ]
+
+CMD [ "python" ]
