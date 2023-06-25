@@ -2,8 +2,6 @@ FROM ubuntu:23.04
 
 WORKDIR /code
 
-COPY --from=download /code /code
-
 RUN apt-get update && \
     apt-get install -y tar curl wget make automake libtool pkg-config libaio-dev libmysqlclient-dev libssl-dev coreutils \
     curl https//github.com/akopytov/sysbench/archive/refs/tags/1.0.20.tar.gz -o /tmp/code.tar.gz && \
