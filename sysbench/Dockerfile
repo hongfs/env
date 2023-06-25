@@ -13,7 +13,7 @@ WORKDIR /code
 COPY --from=download /code /code
 
 RUN apt-get update && \
-    apt-get install -y make automake libtool pkg-config libaio-dev libmysqlclient-dev libssl-dev \
+    apt-get install -y make automake libtool pkg-config libaio-dev libmysqlclient-dev libssl-dev coreutils \
     ls && \
     ./autogen.sh && \
     ./configure --prefix=/usr --mandir=/usr/share/man && \
