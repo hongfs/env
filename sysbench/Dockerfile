@@ -17,5 +17,7 @@ COPY --from=download /tmp/sysbench-1.0.20 /code
 
 RUN apt-get update && \
     apt-get install -y make automake libtool pkg-config libaio-dev libmysqlclient-dev libssl-dev && \
-    ls && \
-    pwd
+    ./autogen.sh && \
+    ./configure && \
+    make && \
+    make install
