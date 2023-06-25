@@ -1,9 +1,9 @@
-FROM ubuntu:23.04
+FROM ghcr.io/hongfs/env:alpine
 
 WORKDIR /code
 
-RUN apt-get update && \
-    apt-get install -y git \
+RUN apk update && \
+    apk add --no-cache git \
     git clone "git@github.com:akopytov/sysbench.git" && \
     cd sysbench && \
     pwd
