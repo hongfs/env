@@ -6,4 +6,5 @@ RUN apk update && \
     apk add --no-cache github-cli \
     gh repo clone akopytov/sysbench && \
     cd sysbench && \
+    echo "1" && \
     pwd
