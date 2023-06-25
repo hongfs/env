@@ -6,7 +6,7 @@ ADD https://github.com/akopytov/sysbench/archive/refs/tags/1.0.20.tar.gz /tmp/co
 
 RUN tar -xzf /tmp/code.tar.gz -C /code --strip-components=1
 
-FROM ghcr.io/hongfs/env:ubuntu
+FROM ubuntu:23.04
 
 WORKDIR /code
 
