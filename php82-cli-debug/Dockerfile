@@ -13,6 +13,12 @@ RUN apt-get update && \
     docker-php-ext-install pdo pdo_mysql mysqli gd zip bcmath && \
     docker-php-ext-enable mysqli gd redis xhprof xdebug
 
+RUN echo "[xhprof]\n\
+\n\
+extension=xhprof.so\n\
+xhprof.collect_additional_info=1\n\
+xhprof.output_dir=/xhprof" > /usr/local/etc/php/conf.d/docker-php-ext-xhprof.ini
+
 RUN echo "zend_extension=xdebug\n\
 \n\
 [Xdebug]\n\
