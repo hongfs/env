@@ -17,7 +17,7 @@ RUN echo "[xhprof]\n\
 \n\
 extension=xhprof.so\n\
 xhprof.collect_additional_info=1\n\
-xhprof.output_dir=/xhprof" > /usr/local/etc/php/conf.d/docker-php-ext-xhprof.ini
+xhprof.output_dir=/xhprof" >> "$PHP_INI_DIR/php.ini"
 
 RUN echo "zend_extension=xdebug\n\
 \n\
