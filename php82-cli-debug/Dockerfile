@@ -8,11 +8,10 @@ RUN apt-get update && \
     apt-get install -y git zip libpng-dev libzip-dev && \
     rm -rf /var/lib/apt/lists/* && \
     mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
-    pecl install redis && \
+    pecl install redis xhprof && \
     pecl install https://pecl.php.net/get/xdebug-3.2.1.tgz && \
     docker-php-ext-install pdo pdo_mysql mysqli gd zip bcmath && \
-    docker-php-ext-enable mysqli gd redis xdebug && \
-    echo "1"
+    docker-php-ext-enable mysqli gd redis xhprof xdebug
 
 RUN echo "zend_extension=xdebug\n\
 \n\
