@@ -5,13 +5,14 @@ FROM php:8.2.5-cli as php
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN apt-get update && \
-    apt-get install -y git zip libpng-dev libzip-dev vi graphviz && \
+    apt-get install -y git zip libpng-dev libzip-dev vim graphviz && \
     rm -rf /var/lib/apt/lists/* && \
     mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
     pecl install redis xhprof && \
     pecl install https://pecl.php.net/get/xdebug-3.2.1.tgz && \
     docker-php-ext-install pdo pdo_mysql mysqli gd zip bcmath && \
-    docker-php-ext-enable mysqli gd redis xhprof xdebug
+    docker-php-ext-enable mysqli gd redis xhprof xdebug && \
+    mkdir /xhprof
 
 RUN git clone https://github.com/hongfs/xhprof-20230705.git /xhprof_code
 
