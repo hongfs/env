@@ -13,6 +13,8 @@ RUN apt-get update && \
     docker-php-ext-install pdo pdo_mysql mysqli gd zip bcmath && \
     docker-php-ext-enable mysqli gd redis xhprof xdebug
 
+RUN git clone -b v2.3.9 https://github.com/longxinH/xhprof.git /xhprof_code
+
 RUN echo "[xhprof]\n\
 \n\
 extension=xhprof.so\n\
