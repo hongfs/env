@@ -40,17 +40,12 @@ jobs:
               continue
             fi
 
-            echo "Building $name"
-
             if [ "$name" = "grafana-test" ]; then
-              cp -f ./$name/zh-Hans.json /tmp/zh-Hans.json
-              rm -rf ./$name/
-              git clone -b v9.5.2 https://github.com/grafana/grafana.git $name
-              cp /tmp/zh-Hans.json ./$name/public/locales/zh-Hans/grafana.json
+              git clone -b v10.0.1 https://github.com/grafana/grafana.git $name
               sed -i "s+//raw.githubusercontent.com+//ghproxy.com/https://raw.githubusercontent.com+" ./$name/pkg/services/updatechecker/grafana.go
-              docker buildx create --name builder_$name --driver docker-container
-              docker buildx use builder_$name
-              docker buildx build --platform=linux/amd64 -t $REGISTRY/$GITHUB_REPOSITORY:$name --push ./$name/
+              docker build --no-cache -t $GITHUB_REPOSITORY:$name ./$name/
+              docker tag $GITHUB_REPOSITORY:$name $REGISTRY/$GITHUB_REPOSITORY:$name
+              docker push $REGISTRY/$GITHUB_REPOSITORY:$name
               continue
             fi
 
