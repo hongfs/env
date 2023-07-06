@@ -37,4 +37,4 @@ jobs:
           cd $GITHUB_WORKSPACE
           docker buildx create --name builder --driver docker-container
           docker buildx use builder
-          docker buildx build --no-cache --platform=linux/amd64,linux/arm64 -t $REGISTRY/$GITHUB_REPOSITORY:grafana --push .
+          docker buildx build --no-cache --platform=linux/amd64 -t $REGISTRY/$GITHUB_REPOSITORY:grafana --push .
