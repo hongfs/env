@@ -41,9 +41,10 @@ jobs:
             fi
 
             if [ "$name" = "grafana-test" ]; then
-              git clone -b v10.0.1 https://github.com/grafana/grafana.git $name
-              sed -i "s+//raw.githubusercontent.com+//ghproxy.com/https://raw.githubusercontent.com+" ./$name/pkg/services/updatechecker/grafana.go
-              docker build --no-cache -t $GITHUB_REPOSITORY:$name ./$name/
+              git clone -b v10.0.1 https://github.com/grafana/grafana.git grafana
+              cd grafana
+              sed -i "s+//raw.githubusercontent.com+//ghproxy.com/https://raw.githubusercontent.com+" ./pkg/services/updatechecker/grafana.go
+              docker build --no-cache -t $GITHUB_REPOSITORY:$name .
               docker tag $GITHUB_REPOSITORY:$name $REGISTRY/$GITHUB_REPOSITORY:$name
               docker push $REGISTRY/$GITHUB_REPOSITORY:$name
               continue
