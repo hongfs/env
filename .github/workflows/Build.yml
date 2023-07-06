@@ -40,14 +40,6 @@ jobs:
               continue
             fi
 
-            if [ "$name" = "grafana-test" ]; then
-              git clone -b release-10.0.1 https://github.com/hongfs/grafana-zh.git grafana
-              docker buildx create --name builder_$name --driver docker-container
-              docker buildx use builder_$name
-              docker buildx build --no-cache --platform=linux/amd64 -t $REGISTRY/$GITHUB_REPOSITORY:$name --push ./grafana/
-              continue
-            fi
-
             if [[ "$name" =~ ^"runnergo_" ]]; then
               docker buildx create --name builder_$name --driver docker-container
               docker buildx use builder_$name

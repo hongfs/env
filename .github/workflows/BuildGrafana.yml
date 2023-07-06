@@ -1,0 +1,40 @@
+name: Build Grafana
+
+on:
+  push:
+    paths:
+      - ".github/workflows/BuildGrafana.yml"
+
+env:
+  REGISTRY: ghcr.io
+  V: 1
+
+jobs:
+  build-tdesign:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          repository: hongfs/grafana-zh
+          ref: release-10.0.1
+
+      - name: Build
+        run: |
+          cd $GITHUB_WORKSPACE
+          docker buildx create --name builder --driver docker-container
+          docker buildx use builder
+          docker buildx build --no-cache --platform=linux/amd64,linux/arm64 -t $REGISTRY/$GITHUB_REPOSITORY:grafana --push .
