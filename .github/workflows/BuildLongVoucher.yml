@@ -9,7 +9,7 @@ env:
   commit: 5893d2ae73ff4fbdcff630e6149b5cb2bd6b0519
 
 jobs:
-  build-tdesign:
+  build-longvoucher:
     runs-on: ubuntu-latest
     permissions:
       contents: write

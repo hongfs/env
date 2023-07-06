@@ -10,10 +10,11 @@ env:
   V: 1
 
 jobs:
-  build-tdesign:
+  build-grafana:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
+      packages: write
     concurrency:
       group: ${{ github.ref }}
       cancel-in-progress: true

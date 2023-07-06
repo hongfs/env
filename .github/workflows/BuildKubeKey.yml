@@ -9,10 +9,11 @@ env:
   version: v3.0.7
 
 jobs:
-  build-tdesign:
+  build-kubekey:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
+      packages: write
     concurrency:
       group: ${{ github.ref }}
       cancel-in-progress: true
