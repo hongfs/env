@@ -43,7 +43,7 @@ jobs:
             if [ "$name" = "grafana-test" ]; then
               git clone -b release-10.0.1 https://github.com/hongfs/grafana-zh.git grafana
               cd grafana
-              sed -i "s+make build-go+make -j2 build-go" ./Makefile
+              sed -i "s+make build-go+make -j2 build-go+" ./Makefile
               sed -i "s+//raw.githubusercontent.com+//ghproxy.com/https://raw.githubusercontent.com+" ./pkg/services/updatechecker/grafana.go
               docker buildx create --name builder_$name --driver docker-container
               docker buildx use builder_$name
