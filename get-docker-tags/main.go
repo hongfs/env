@@ -13,11 +13,9 @@ import (
 )
 
 func main() {
-	gin.SetMode(gin.ReleaseMode)
-
 	r := gin.Default()
 	r.GET("/get", handle)
-	err := r.Run("0.0.0.0:9000")
+	err := r.Run(":9000")
 
 	if err != nil {
 		panic(err)
@@ -41,6 +39,7 @@ func handle(c *gin.Context) {
 		return
 	}
 
+	log.Printf("get version success: %s", strings.Join(versions, ","))
 	c.String(http.StatusOK, strings.Join(versions, ","))
 	return
 }
