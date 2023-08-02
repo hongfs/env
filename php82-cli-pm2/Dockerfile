@@ -2,6 +2,7 @@ FROM ghcr.io/hongfs/env:php82-cli as php
 
 ENV NODE_VERSION 20.1.0
 ENV NVM_NODEJS_ORG_MIRROR=https://repo.huaweicloud.com/nodejs/
+ENV NVM_BIN /root/.nvm/versions/node/v$NODE_VERSION/bin
 
 # https://github.com/Unitech/pm2
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash && \
