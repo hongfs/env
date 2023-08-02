@@ -13,5 +13,5 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | b
     nvm use default && \
     npm install -g npm && \
     npm install -g pm2 && \
-    ln $(npm config get prefix)/bin/node /usr/local/bin/node && \
-    ln $(npm config get prefix)/bin/npm /usr/local/bin/npm
+    ln $NVM_BIN/node /usr/local/bin/node && \
+    ln $NVM_BIN/npm /usr/local/bin/npm
