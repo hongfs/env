@@ -5,6 +5,7 @@ ENV NODE_VERSION 20.1.0
 
 # https://github.com/Unitech/pm2
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash && \
+    mkdir -p $NVM_DIR && \
     source $NVM_DIR/nvm.sh && \
     nvm install $NODE_VERSION && \
     nvm alias default $NODE_VERSION && \
