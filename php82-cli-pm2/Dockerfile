@@ -13,4 +13,5 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | b
     npm install -g npm && \
     npm install -g pm2 && \
     npm version && \
-    npm config ls -l
+    npm config ls -l && \
+    ln -s $(npm config get prefix)/bin /usr/local/bin
