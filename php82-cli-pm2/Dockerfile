@@ -2,6 +2,7 @@ FROM ghcr.io/hongfs/env:php82-cli as php
 
 ENV NODE_DIR /usr/local/nvm
 ENV NODE_VERSION 20.1.0
+ENV NVM_NODEJS_ORG_MIRROR=https://repo.huaweicloud.com/nodejs/
 
 # https://github.com/Unitech/pm2
 RUN mkdir -p $NODE_DIR && \
