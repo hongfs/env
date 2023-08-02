@@ -10,13 +10,10 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | b
     nvm install $NODE_VERSION && \
     nvm alias default $NODE_VERSION && \
     nvm use default && \
+    npm config set prefix /usr/local && \
     npm install -g npm && \
     npm install -g pm2 && \
     npm version && \
     npm config ls -l && \
     ln $(npm config get prefix)/bin/node /usr/local/bin/node && \
-    ln $(npm config get prefix)/bin/npm /usr/local/bin/npm && \
-    ln $(npm config get prefix)/bin/pm2 /usr/local/bin/pm2 && \
-    ln $(npm config get prefix)/bin/pm2-dev /usr/local/bin/pm2-dev && \
-    ln $(npm config get prefix)/bin/pm2-docker /usr/local/bin/pm2-docker && \
-    ln $(npm config get prefix)/bin/pm2-runtime /usr/local/bin/pm2-runtime
+    ln $(npm config get prefix)/bin/npm /usr/local/bin/npm
