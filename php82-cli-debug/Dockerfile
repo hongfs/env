@@ -8,24 +8,23 @@ RUN apt-get update && \
     apt-get install -y git zip libpng-dev libzip-dev vim graphviz && \
     rm -rf /var/lib/apt/lists/* && \
     mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
-    pecl install redis xhprof && \
+    pecl install redis && \
     pecl install https://pecl.php.net/get/xdebug-3.2.2.tgz && \
     docker-php-ext-install pdo pdo_mysql mysqli gd zip bcmath && \
-    docker-php-ext-enable mysqli gd redis xhprof xdebug && \
-    mkdir /xhprof
+    docker-php-ext-enable mysqli gd redis xdebug
 
-RUN git clone https://github.com/hongfs/xhprof-20230705.git /xhprof_code && \
-    cd /xhprof_code/extension && \
-    phpize && \
-    ./configure && \
-    make && \
-    make install && \
-    rm -rf /xhprof_code && \
-    echo "[xhprof]\n\
-\n\
-extension=xhprof.so\n\
-xhprof.collect_additional_info=1\n\
-xhprof.output_dir=/xhprof" >> "$PHP_INI_DIR/php.ini"
+# RUN git clone https://github.com/hongfs/xhprof-20230705.git /xhprof_code && \
+#     cd /xhprof_code/extension && \
+#     phpize && \
+#     ./configure && \
+#     make && \
+#     make install && \
+#     rm -rf /xhprof_code && \
+#     echo "[xhprof]\n\
+# \n\
+# extension=xhprof.so\n\
+# xhprof.collect_additional_info=1\n\
+# xhprof.output_dir=/xhprof" >> "$PHP_INI_DIR/php.ini"
 
 RUN echo "zend_extension=xdebug\n\
 \n\
