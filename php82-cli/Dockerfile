@@ -1,6 +1,6 @@
 FROM library/composer:2.5.8 as composer
 
-FROM php:8.2.5-cli as php
+FROM php:8.2.8-cli as php
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
@@ -10,6 +10,5 @@ RUN apt-get update && \
     mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
     pecl install redis && \
     docker-php-ext-install pdo pdo_mysql mysqli gd zip bcmath && \
-    docker-php-ext-enable mysqli gd redis && \
-    echo "1"
+    docker-php-ext-enable mysqli gd redis
 
