@@ -113,7 +113,7 @@ func getToken(domain, name string) (string, error) {
 	urlStr := fmt.Sprintf("https://%s/v2", domain)
 
 	if domain == "ghcr.io" {
-		urlStr = fmt.Sprintf("https://%s/token", domain)
+		urlStr = fmt.Sprintf("https://%s/v2/%s/tags/list", domain, name)
 	}
 
 	req, err := http.Get(urlStr)
