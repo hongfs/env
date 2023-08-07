@@ -124,9 +124,10 @@ func getToken(domain, name string) (string, error) {
 
 	defer req.Body.Close()
 
-	if req.Header.Get("Docker-Distribution-Api-Version") != "registry/2.0" {
-		return "", errors.New("不支持 v2")
-	}
+	// ghcr.io 不支持这个 header
+	//if req.Header.Get("Docker-Distribution-Api-Version") != "registry/2.0" {
+	//	return "", errors.New("不支持 v2")
+	//}
 
 	bearer := req.Header.Get("Www-Authenticate")
 
