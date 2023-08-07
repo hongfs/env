@@ -51,6 +51,8 @@ func handle(c *gin.Context) {
 func getVersion(domain, name string) ([]string, error) {
 	urlStr := fmt.Sprintf("https://%s/v2/%s/tags/list", domain, name)
 
+	log.Printf("get url: %s", urlStr)
+
 	req, err := http.NewRequest(http.MethodGet, urlStr, nil)
 
 	if err != nil {
@@ -66,6 +68,8 @@ func getVersion(domain, name string) ([]string, error) {
 
 		if token != "" {
 			req.Header.Set("Authorization", "Bearer "+token)
+
+			log.Printf("get token: %s", token)
 		}
 	}
 
