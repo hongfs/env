@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"io"
-	"log"
 	"net/http"
 	"net/url"
 	"strings"
@@ -26,24 +25,24 @@ func handle(c *gin.Context) {
 	fullname := c.Query("name")
 
 	if fullname == "" {
-		log.Printf("name is empty")
+		fmt.Printf("name is empty")
 		return
 	}
 
-	log.Printf("get name: %s", fullname)
+	fmt.Printf("get name: %s", fullname)
 
 	domain, name := parseName(fullname)
 
-	log.Printf("get domain: %s, name: %s", domain, name)
+	fmt.Printf("get domain: %s, name: %s", domain, name)
 
 	versions, err := getVersion(domain, name)
 
 	if err != nil {
-		log.Printf("get version error: %s", err.Error())
+		fmt.Printf("get version error: %s", err.Error())
 		return
 	}
 
-	log.Printf("get version success: %s", strings.Join(versions, ","))
+	fmt.Printf("get version success: %s", strings.Join(versions, ","))
 	c.String(http.StatusOK, strings.Join(versions, ","))
 	return
 }
@@ -51,7 +50,7 @@ func handle(c *gin.Context) {
 func getVersion(domain, name string) ([]string, error) {
 	urlStr := fmt.Sprintf("https://%s/v2/%s/tags/list", domain, name)
 
-	log.Printf("get url: %s", urlStr)
+	fmt.Printf("get url: %s", urlStr)
 
 	req, err := http.NewRequest(http.MethodGet, urlStr, nil)
 
@@ -68,7 +67,7 @@ func getVersion(domain, name string) ([]string, error) {
 	if token != "" {
 		req.Header.Set("Authorization", "Bearer "+token)
 
-		log.Printf("get token: %s", token)
+		fmt.Printf("get token: %s", token)
 	}
 
 	resp, err := http.DefaultClient.Do(req)
