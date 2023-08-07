@@ -59,18 +59,16 @@ func getVersion(domain, name string) ([]string, error) {
 		return nil, err
 	}
 
-	if "ghcr.io" != domain {
-		token, err := getToken(domain, name)
+	token, err := getToken(domain, name)
 
-		if err != nil {
-			return nil, err
-		}
+	if err != nil {
+		return nil, err
+	}
 
-		if token != "" {
-			req.Header.Set("Authorization", "Bearer "+token)
+	if token != "" {
+		req.Header.Set("Authorization", "Bearer "+token)
 
-			log.Printf("get token: %s", token)
-		}
+		log.Printf("get token: %s", token)
 	}
 
 	resp, err := http.DefaultClient.Do(req)
@@ -114,6 +112,10 @@ func getToken(domain, name string) (string, error) {
 	var data Data
 
 	urlStr := fmt.Sprintf("https://%s/v2", domain)
+
+	if domain == "ghcr.io" {
+		urlStr = fmt.Sprintf("https://%s/token", domain)
+	}
 
 	req, err := http.Get(urlStr)
 
