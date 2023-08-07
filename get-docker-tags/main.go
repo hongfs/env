@@ -30,7 +30,11 @@ func handle(c *gin.Context) {
 		return
 	}
 
+	log.Printf("get name: %s", fullname)
+
 	domain, name := parseName(fullname)
+
+	log.Printf("get domain: %s, name: %s", domain, name)
 
 	versions, err := getVersion(domain, name)
 
@@ -72,6 +76,10 @@ func getVersion(domain, name string) ([]string, error) {
 	}
 
 	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, errors.New(fmt.Sprintf("status code: %d", resp.StatusCode))
+	}
 
 	body, err := io.ReadAll(resp.Body)
 
