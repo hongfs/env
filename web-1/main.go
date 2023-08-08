@@ -41,7 +41,7 @@ func main() {
 			return
 		}
 
-		fmt.Fprint(w, Hostname)
+		fmt.Fprint(w, Hostname + "\n")
 	})
 
 	http.ListenAndServe(":80", nil)
