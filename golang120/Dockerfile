@@ -1,7 +1,9 @@
-FROM golang:1.20.4-alpine
+FROM golang:1.20.7-alpine
 
 ENV GO111MODULE=on \
-    CGO_ENABLED=1
+    CGO_ENABLED=0 \
+    GOARCH=amd64 \
+    GOOS=linux
 
 RUN apk update && \
     apk add --no-cache build-base && \

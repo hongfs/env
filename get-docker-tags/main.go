@@ -139,6 +139,8 @@ func getToken(domain, name string) (string, error) {
 
 	urlStr = fmt.Sprintf("%s?service=%s&scope=repository:%s:pull", bearers[1], bearers[3], name)
 
+	fmt.Printf("get token url: %s", urlStr)
+
 	req, err = http.Get(urlStr)
 
 	if err != nil {
