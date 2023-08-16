@@ -6,7 +6,7 @@ on:
       - ".github/workflows/BuildKubeKey.yml"
 
 env:
-  version: v3.0.8
+  version: v3.0.9
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
