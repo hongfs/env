@@ -6,7 +6,11 @@ on:
       - ".github/workflows/BuildKubeKey.yml"
 
 env:
-  version: v3.0.7
+  version: v3.0.8
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build-kubekey:
@@ -14,9 +18,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-      cancel-in-progress: true
 
     steps:
       - name: Checkout repository
@@ -28,11 +29,6 @@ jobs:
       - name: Build
         run: |
           cd $GITHUB_WORKSPACE
-          sed -i 's+https://github.com/+https://hongfs-cdn.oss-cn-shenzhen-internal.aliyuncs.com/github.com/+' ./cmd/kk/pkg/files/file.go
-          sed -i 's+https://storage.googleapis.com/+https://hongfs-cdn.oss-cn-shenzhen-internal.aliyuncs.com/external/storage.googleapis.com/+' ./cmd/kk/pkg/files/file.go
-          sed -i 's+https://get.helm.sh/+https://hongfs-cdn.oss-cn-shenzhen-internal.aliyuncs.com/external/get.helm.sh/+' ./cmd/kk/pkg/files/file.go
-          sed -i 's+https://download.docker.com/+https://hongfs-cdn.oss-cn-shenzhen-internal.aliyuncs.com/external/download.docker.com/+' ./cmd/kk/pkg/files/file.go
-
           make kk
           chmod +x ./bin/kk
       - uses: ncipollo/release-action@v1

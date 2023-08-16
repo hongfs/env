@@ -8,14 +8,15 @@ on:
 env:
   version: 1.2.0
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-tdesign:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-      cancel-in-progress: true
 
     steps:
       - name: Checkout repository
