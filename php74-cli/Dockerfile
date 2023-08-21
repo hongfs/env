@@ -12,7 +12,7 @@ RUN apt-get update && \
     pecl install https://pecl.php.net/get/xdebug-3.1.6.tgz && \
     docker-php-ext-install pdo pdo_mysql mysqli gd zip bcmath && \
     docker-php-ext-enable mysqli gd redis xdebug && \
-    echo "1"
+    echo "2"
 
 RUN echo "zend_extension=xdebug\n\
 \n\
