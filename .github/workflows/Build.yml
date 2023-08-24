@@ -49,7 +49,7 @@ jobs:
             fi
 
             if [ -e "$name/Dockerfile" ]; then
-              podman build --no-cache  --platform linux/amd64,linux/arm64 -t $GITHUB_REPOSITORY:$name ./$name/
+              podman build --no-cache --format docker -t $GITHUB_REPOSITORY:$name ./$name/
               podman tag $GITHUB_REPOSITORY:$name $REGISTRY/$GITHUB_REPOSITORY:$name
               podman push $REGISTRY/$GITHUB_REPOSITORY:$name
             fi
