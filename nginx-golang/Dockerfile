@@ -1,4 +1,4 @@
-FROM nginx:1.23.4
+FROM ghcr.io/hongfs/env:nginx
 
 WORKDIR /web
 

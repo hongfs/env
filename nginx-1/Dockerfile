@@ -1,5 +1,3 @@
-FROM nginx:1.23.4-alpine
-
-COPY nginx.conf /etc/nginx/nginx.conf
+FROM ghcr.io/hongfs/env:nginx
 
 COPY default.conf /etc/nginx/conf.d/default.conf
