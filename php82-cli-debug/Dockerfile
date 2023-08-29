@@ -1,6 +1,6 @@
 FROM library/composer:2.5.8 as composer
 
-FROM php:8.2.8-cli as php
+FROM library/php:8.2.9-cli as php
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
