@@ -13,18 +13,19 @@ RUN apt-get update && \
     docker-php-ext-install pdo pdo_mysql mysqli gd zip bcmath && \
     docker-php-ext-enable mysqli gd redis xdebug
 
-# RUN git clone https://github.com/hongfs/xhprof-20230705.git /xhprof_code && \
-#     cd /xhprof_code/extension && \
-#     phpize && \
-#     ./configure && \
-#     make && \
-#     make install && \
-#     rm -rf /xhprof_code && \
-#     echo "[xhprof]\n\
-# \n\
-# extension=xhprof.so\n\
-# xhprof.collect_additional_info=1\n\
-# xhprof.output_dir=/xhprof" >> "$PHP_INI_DIR/php.ini"
+RUN git clone https://github.com/hongfs/xhprof-20230705.git /xhprof_code && \
+    cd /xhprof_code/extension && \
+    phpize && \
+    ./configure && \
+    make && \
+    make install && \
+    rm -rf /xhprof_code && \
+    mkdir /xhprof && \
+    echo "[xhprof]\n\
+\n\
+extension=xhprof.so\n\
+xhprof.collect_additional_info=1\n\
+xhprof.output_dir=/xhprof" >> "$PHP_INI_DIR/php.ini"
 
 RUN echo "zend_extension=xdebug\n\
 \n\
