@@ -19,7 +19,6 @@ RUN git clone https://github.com/hongfs/xhprof-20230705.git /xhprof_code && \
     ./configure && \
     make && \
     make install && \
-    rm -rf /xhprof_code && \
     mkdir /xhprof && \
     echo "[xhprof]\n\
 \n\
