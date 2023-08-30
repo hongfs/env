@@ -4,7 +4,7 @@ ENV AWS_EC2_METADATA_DISABLED=true
 
 RUN apt-get update && \
     apt-get -y install unzip curl && \
-    curl -Ls https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.11.14.zip -o aws.zip && \
+    curl -Ls https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.13.13.zip -o aws.zip && \
     unzip aws.zip && \
     rm -rf aws.zip && \
     ./aws/install && \

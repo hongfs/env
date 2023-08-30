@@ -18,11 +18,11 @@ func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, "1")
+		fmt.Fprint(w, "1\n")
 	})
 
 	http.HandleFunc("/status", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, "{\"code\":1}")
+		fmt.Fprint(w, "{\"code\":1}\n")
 	})
 
 	http.HandleFunc("/output", func(w http.ResponseWriter, r *http.Request) {
@@ -32,7 +32,7 @@ func main() {
 			log.Println(k, v)
 		}
 
-		fmt.Fprint(w, "{\"code\":1}")
+		fmt.Fprint(w, "{\"code\":1}\n")
 	})
 
 	http.HandleFunc("/hostname", func(w http.ResponseWriter, r *http.Request) {

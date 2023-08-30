@@ -12,6 +12,54 @@ docker pull ghcr.io/hongfs/env:php-language
 docker pull ghcr.io/hongfs/env:acme.sh
 ```
 
+## acme.sh
+
+只是一个镜像备份操作，具体使用可见： https://www.hongfs.cn/2023/06/script/github-actions-generates-wildcard-certificates-for-multiple-domain-names-using-acmesh-and-aliyun-dns/
+
+## aliyun-cli
+
+阿里云 CLI。
+
+```shell
+$ podman run --rm ghcr.hongfs.dev/hongfs/env:aliyun-cli aliyun version
+
+$ alias aliyun='podman run --rm ghcr.hongfs.dev/hongfs/env:aliyun-cli aliyun'
+$ aliyun version
+```
+
+## alpine
+
+提供了默认上海时区。
+
+## alpine-debug
+
+相比 alpine ，默认提供了一些调试的基础依赖包。
+
+## aws-cli
+
+AWS CLI。
+
+## web-1
+
+提供基础的请求接口，方便进行压测。
+
+```shell
+$ podman run -d -p 80:80 ghcr.io/hongfs/env:web-1
+
+$ curl -s http://127.0.0.1:80
+1
+
+$ curl -s http://127.0.0.1:80/status
+{"code":1}
+
+# 会在日志中打印请求头
+$ curl -s http://127.0.0.1:80/output
+{"code":1}
+
+$ curl -s http://127.0.0.1:80/hostname
+c5036d0de87a
+```
+
 ## 翻译生成
 
 ```shell
