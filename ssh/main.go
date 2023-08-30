@@ -3,7 +3,9 @@ package main
 import (
 	"errors"
 	"golang.org/x/crypto/ssh"
+	"log"
 	"os"
+	"time"
 )
 
 func main() {
@@ -12,6 +14,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	os.Exit(0)
 }
 
 func handle() error {
@@ -47,12 +51,16 @@ func handle() error {
 		return errors.New("服务器命令不能为空")
 	}
 
+	log.Printf("服务器地址: %s", addr)
+	log.Printf("服务器用户名: %s", username)
+
 	client, err := ssh.Dial("tcp", addr, &ssh.ClientConfig{
 		User: username,
 		Auth: []ssh.AuthMethod{
 			ssh.Password(password),
 		},
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
+		Timeout:         time.Second * 10,
 	})
 
 	if err != nil {
