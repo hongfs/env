@@ -53,6 +53,7 @@ func handle() error {
 
 	log.Printf("服务器地址: %s", addr)
 	log.Printf("服务器用户名: %s", username)
+	log.Printf("执行命令: %s", command)
 
 	client, err := ssh.Dial("tcp", addr, &ssh.ClientConfig{
 		User: username,
