@@ -79,11 +79,5 @@ func handle() error {
 	session.Stderr = os.Stderr
 	session.Stdin = os.Stdin
 
-	err = session.Run(command)
-
-	if err != nil {
-		return err
-	}
-
-	return session.Wait()
+	return session.Run(command)
 }
