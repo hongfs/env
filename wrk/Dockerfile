@@ -5,16 +5,11 @@ FROM alpine as build
 WORKDIR /code
 
 RUN apk update && \
-    apk --no-cache add alpine-sdk perl linux-headers make gcc && \
+    apk --no-cache add alpine-sdk perl libssl-dev luajit linux-headers make gcc && \
     git clone https://github.com/wg/wrk && \
     cd wrk && \
     make && \
+    cp wrk /usr/local/bin && \
     rm -rf /var/cache/apk/*
-
-FROM alpine
-
-COPY --from=build /code/wrk /usr/local/bin/
-
-WORKDIR /data
 
 ENTRYPOINT ["wrk"]
