@@ -5,7 +5,7 @@ FROM alpine as build
 WORKDIR /code
 
 RUN apk update && \
-    apk --no-cache add alpine-sdk perl linux-headers && \
+    apk --no-cache add alpine-sdk perl linux-headers make gcc && \
     git clone https://github.com/wg/wrk && \
     cd wrk && \
     make && \
