@@ -36,6 +36,7 @@ RUN pwd && \
     docker-php-ext-install bcmath && \
     docker-php-ext-install opcache && \
     docker-php-ext-enable mysqli gd redis imagick yaconf yac && \
+    # 不生效，自行在 dockerfile 中添加
     docker-php-ext-install pcntl
 
 # 设置 opcache
