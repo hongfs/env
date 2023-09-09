@@ -24,7 +24,7 @@ RUN pwd && \
     sed -i "s+session.use_cookies = 1+session.use_cookies = 0+" "$PHP_INI_DIR/php.ini" && \
     sed -i "s+session.use_only_cookies = 1+session.use_only_cookies = 0+" "$PHP_INI_DIR/php.ini" && \
     pecl install redis && \
-    docker-php-ext-install pdo pdo_mysql mysqli gd zip bcmath opcache && \
+    docker-php-ext-install pdo pdo_mysql mysqli gd zip bcmath opcache pcntl && \
     docker-php-ext-enable mysqli gd redis
 
 # 设置 opcache
