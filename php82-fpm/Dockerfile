@@ -35,9 +35,8 @@ RUN pwd && \
     docker-php-ext-install pdo pdo_mysql mysqli gd zip && \
     docker-php-ext-install bcmath && \
     docker-php-ext-install opcache && \
-    docker-php-ext-install pcntl && \
-    docker-php-ext-configure pcntl --enable-pcntl && \
-    docker-php-ext-enable mysqli gd redis imagick yaconf yac
+    docker-php-ext-enable mysqli gd redis imagick yaconf yac && \
+    docker-php-ext-install pcntl
 
 # 设置 opcache
 RUN echo "[opcache]\n\
