@@ -32,8 +32,9 @@ RUN pwd && \
     pecl install imagick-3.7.0 && \
     pecl install yaconf-1.1.2 && \
     pecl install yac-2.3.1 && \
+    docker-php-ext-configure pcntl --enable-pcntl && \
     docker-php-ext-install pdo pdo_mysql mysqli gd zip bcmath opcache pcntl && \
-    docker-php-ext-enable mysqli gd redis imagick yaconf yac pcntl
+    docker-php-ext-enable mysqli gd redis imagick yaconf yac
 
 # 设置 opcache
 RUN echo "[opcache]\n\
