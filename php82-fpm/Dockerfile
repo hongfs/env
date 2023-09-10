@@ -51,7 +51,7 @@ opcache.max_file_size=0\n\
 opcache.consistency_checks=0\n\
 opcache.file_update_protection=0\n\
 opcache.validate_timestamps=0\n\
-opcache.enable_file_override=0" > /usr/local/etc/php/conf.d/opcache.ini
+opcache.enable_file_override=0" > "$PHP_INI_DIR/conf.d/opcache.ini"
 
 # 设置 php-fpm
 RUN echo "\n\
