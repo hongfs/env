@@ -7,7 +7,7 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN pwd && \
     mkdir -p /tmp/opcache && \
     apt-get update && \
-    apt-get install -y git zip libpng-dev libzip-dev libmagickwand-dev iproute2 procps && \
+    apt-get install -y git zip libevent libpng-dev libzip-dev libmagickwand-dev iproute2 procps && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
@@ -25,7 +25,7 @@ RUN pwd && \
     sed -i "s+session.use_only_cookies = 1+session.use_only_cookies = 0+" "$PHP_INI_DIR/php.ini" && \
     pecl install redis libevent event && \
     docker-php-ext-install pdo pdo_mysql mysqli gd zip bcmath opcache pcntl && \
-    docker-php-ext-enable mysqli gd redis event
+    docker-php-ext-enable mysqli gd redis libevent event
 
 # 设置 opcache
 RUN echo "[opcache]\n\
