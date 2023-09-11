@@ -7,7 +7,7 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN pwd && \
     mkdir -p /tmp/opcache && \
     apt-get update && \
-    apt-get install -y git zip libevent-dev libpng-dev libzip-dev libmagickwand-dev iproute2 procps && \
+    apt-get install -y git zip libevent-dev libpng-dev libzip-dev libmagickwand-dev iproute2 procps openssl && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
