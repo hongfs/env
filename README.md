@@ -2,12 +2,15 @@
 
 提供我研发过程中常用的环境.
 
+- 镜像会经常性调整，在业务上一定要具体到 SHA256。
+- 建议优先使用 podman 去使用容器，如果出现问题，再考虑 docker。
+
 ```
 docker pull ghcr.io/hongfs/env:php82-fpm
 docker pull ghcr.io/hongfs/env:php82-cli
 docker pull ghcr.io/hongfs/env:php81-cli
 docker pull ghcr.io/hongfs/env:php80-cli
-docker pull ghcr.io/hongfs/env:php79-cli
+docker pull ghcr.io/hongfs/env:php74-cli
 docker pull ghcr.io/hongfs/env:php-language
 docker pull ghcr.io/hongfs/env:acme.sh
 ```
@@ -63,7 +66,7 @@ c5036d0de87a
 ## 翻译生成
 
 ```shell
-$ docker run --rm -it -v ~/lang:/data/ ghcr.io/hongfs/env:php-language php index.php
+$ podman run --rm -it -v ~/lang:/data/ ghcr.io/hongfs/env:php-language php index.php
 ```
 
 你需要将 `data.xlsx` 挂载到 `/data/data.xlsx` 下。

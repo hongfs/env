@@ -21,10 +21,11 @@ RUN docker-php-ext-install -j$(nproc) sockets && \
     docker-php-ext-install -j$(nproc) pcntl && \
     pecl install redis-6.0.0 && \
     pecl install event-3.0.8 && \
+    pecl install inotify-3.0.0 && \
     pecl install msgpack-2.2.0 && \
     pecl install yac-2.3.1 && \
     pecl install yaconf-1.1.2 && \
-    docker-php-ext-enable mysqli gd redis event msgpack yac yaconf
+    docker-php-ext-enable mysqli gd redis event inotify msgpack yac yaconf
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
     # 关闭 PHP 版本的显示
