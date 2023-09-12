@@ -1,17 +1,32 @@
 FROM library/composer:2.5.8 as composer
 
-FROM php:8.2.8-cli as php
+FROM php:8.2.10-cli as php
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
-RUN pwd && \
-    mkdir -p /tmp/opcache && \
-    apt-get update && \
-    apt-get install -y git zip libpng-dev libzip-dev libmagickwand-dev iproute2 procps && \
+RUN apt-get update && \
+    apt-get install -y git zip libevent-dev libpng-dev libzip-dev libssl-dev libmagickwand-dev iproute2 procps && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
-    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
+    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+RUN docker-php-ext-install -j$(nproc) sockets && \
+    docker-php-ext-install -j$(nproc) pdo && \
+    docker-php-ext-install -j$(nproc) pdo_mysql && \
+    docker-php-ext-install -j$(nproc) mysqli && \
+    docker-php-ext-install -j$(nproc) gd && \
+    docker-php-ext-install -j$(nproc) zip && \
+    docker-php-ext-install -j$(nproc) bcmath && \
+    docker-php-ext-install -j$(nproc) opcache && \
+    docker-php-ext-install -j$(nproc) pcntl && \
+    pecl install redis-6.0.0 && \
+    pecl install event-3.0.8 && \
+    pecl install msgpack-2.2.0 && \
+    pecl install yac-2.3.1 && \
+    pecl install yaconf-1.1.2 && \
+    docker-php-ext-enable mysqli gd redis event msgpack yac yaconf
+
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
     # 关闭 PHP 版本的显示
     sed -i "s+expose_php = On+expose_php = Off+" "$PHP_INI_DIR/php.ini" && \
     # 序列化浮点数时存储的有效数字的位数。
@@ -22,10 +37,7 @@ RUN pwd && \
     sed -i "s+bcmath.scale = 0+bcmath.scale = 2+" "$PHP_INI_DIR/php.ini" && \
     # 关闭 cookice
     sed -i "s+session.use_cookies = 1+session.use_cookies = 0+" "$PHP_INI_DIR/php.ini" && \
-    sed -i "s+session.use_only_cookies = 1+session.use_only_cookies = 0+" "$PHP_INI_DIR/php.ini" && \
-    pecl install redis libevent event && \
-    docker-php-ext-install pdo pdo_mysql mysqli gd zip bcmath opcache pcntl && \
-    docker-php-ext-enable mysqli gd redis libevent event
+    sed -i "s+session.use_only_cookies = 1+session.use_only_cookies = 0+" "$PHP_INI_DIR/php.ini"
 
 # 设置 opcache
 RUN echo "[opcache]\n\
