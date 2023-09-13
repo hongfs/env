@@ -19,6 +19,7 @@ RUN docker-php-ext-install -j$(nproc) sockets && \
     docker-php-ext-install -j$(nproc) bcmath && \
     docker-php-ext-install -j$(nproc) opcache && \
     docker-php-ext-install -j$(nproc) pcntl && \
+    docker-php-ext-enable sockets && \
     pecl install redis-6.0.0 && \
     pecl install event-3.0.8 && \
     pecl install inotify-3.0.0 && \
