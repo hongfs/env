@@ -11,6 +11,7 @@ RUN apk update && \
     make && \
     cp wrk /usr/local/bin && \
     rm -rf ./.git && \
+    rm -rf /code/wrk/obj/openssl-1.1.1i/test && \
     rm -rf /var/cache/apk/*
 
 ENTRYPOINT ["wrk"]
