@@ -1,5 +1,5 @@
-FROM ubuntu:22.04
+FROM ghcr.io/hongfs/env:ubuntu
 
 RUN apt-get update && \
-    apt-get install -y podman ca-certificates && \
+    apt-get install -y podman && \
     rm -rf /var/lib/apt/lists/*
