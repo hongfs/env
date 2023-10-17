@@ -22,3 +22,5 @@ RUN mkdir actions-runner && \
     rm -f ./runner.tar.gz && \
     # rm -rf ./externals && \
     pwd
+
+ENTRYPOINT [ "entrypoint.sh" ]
