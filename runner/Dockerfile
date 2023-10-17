@@ -5,6 +5,8 @@ WORKDIR /runner
 ENV RUNNER_ALLOW_RUNASROOT=1
 ENV RUNNER_VERSION=2.310.2
 
+COPY entrypoint.sh /hongfs/entrypoint.sh
+
 RUN yum -y install podman buildah fuse fuse-overlayfs nfs-utils libicu && \
     rm -rf /var/cache
 
@@ -23,4 +25,4 @@ RUN mkdir actions-runner && \
     # rm -rf ./externals && \
     pwd
 
-ENTRYPOINT [ "entrypoint.sh" ]
+ENTRYPOINT [ "/hongfs/entrypoint.sh" ]
