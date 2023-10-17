@@ -9,6 +9,7 @@ COPY entrypoint.sh /hongfs/entrypoint.sh
 
 RUN yum -y install buildah fuse fuse-overlayfs iputils nfs-utils libicu && \
     rm -rf /var/cache && \
+    mkdir -p /usr/bin && \
     ls /usr/bin/podman /usr/bin/docker && \
     chmod +x /hongfs/entrypoint.sh
 
