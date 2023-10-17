@@ -12,7 +12,7 @@ RUN echo '#!/bin/bash' > /etc/rc.local && \
     chmod +x /etc/rc.local && \
     echo "options sunrpc tcp_slot_table_entries=128" >> /etc/modprobe.d/sunrpc.conf && \
     echo "options sunrpc tcp_max_slot_table_entries=128" >>  /etc/modprobe.d/sunrpc.conf && \
-    mkdir -P /mnt/cache
+    mkdir -p /mnt/cache
 
 RUN mkdir actions-runner && \
     cd actions-runner && \
