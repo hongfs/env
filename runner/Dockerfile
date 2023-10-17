@@ -8,6 +8,7 @@ ENV RUNNER_VERSION=2.310.2
 COPY entrypoint.sh /hongfs/entrypoint.sh
 
 RUN yum -y install podman buildah fuse fuse-overlayfs iputils nfs-utils libicu && \
+    curl -Ls https://get.docker.com/ | VERSION="24.0.6" sh && \
     rm -rf /var/cache && \
     chmod +x /hongfs/entrypoint.sh
 
