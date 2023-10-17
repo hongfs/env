@@ -3,6 +3,9 @@
 set -e
 
 mkdir -p ~/.docker/
+
+alias docker="podman"
+
 cd /runner/actions-runner
 
 echo "128" > /proc/sys/sunrpc/tcp_slot_table_entries
