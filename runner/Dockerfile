@@ -1,10 +1,8 @@
-FROM ghcr.io/hongfs/env:ubuntu
+FROM quay.io/podman/stable
 
 WORKDIR /runner
 
-RUN apt-get update && \
-    apt-get install -y podman && \
-    rm -rf /var/lib/apt/lists/*
+RUN yum -y install podman buildah fuse fuse-overlayfs libicu
 
 RUN mkdir actions-runner && \
     cd actions-runner && \
