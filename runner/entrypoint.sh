@@ -10,4 +10,6 @@ fi
 
 RUNNER_ALLOW_RUNASROOT=1 ./config.sh --url https://github.com/$RUNNER_REPO --token $RUNNER_TOKEN --unattended --disableupdate --ephemeral --labels aliyun
 RUNNER_ALLOW_RUNASROOT=1 ./run.sh
+
+sleep 10s
 exit 0
