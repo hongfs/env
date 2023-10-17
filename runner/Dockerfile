@@ -4,8 +4,15 @@ WORKDIR /runner
 
 ENV RUNNER_ALLOW_RUNASROOT=1
 
-RUN yum -y install podman buildah fuse fuse-overlayfs libicu && \
+RUN yum -y install podman buildah fuse fuse-overlayfs nfs-utils libicu && \
     rm -rf /var/cache/yum
+
+RUN echo '#!/bin/bash' > /etc/rc.local && \
+    echo "mount -a -t nfs" >> /etc/rc.local && \
+    chmod +x /etc/rc.local && \
+    echo "options sunrpc tcp_slot_table_entries=128" >> /etc/modprobe.d/sunrpc.conf && \
+    echo "options sunrpc tcp_max_slot_table_entries=128" >>  /etc/modprobe.d/sunrpc.conf && \
+    mkdir -P /mnt/cache
 
 RUN mkdir actions-runner && \
     cd actions-runner && \
