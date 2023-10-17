@@ -8,7 +8,8 @@ ENV RUNNER_VERSION=2.310.2
 COPY entrypoint.sh /hongfs/entrypoint.sh
 
 RUN yum -y install podman buildah fuse fuse-overlayfs nfs-utils libicu && \
-    rm -rf /var/cache
+    rm -rf /var/cache && \
+    chmod +x /hongfs/entrypoint.sh
 
 RUN echo '#!/bin/bash' > /etc/rc.local && \
     echo "mount -a -t nfs" >> /etc/rc.local && \
