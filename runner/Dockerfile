@@ -7,9 +7,10 @@ ENV RUNNER_VERSION=2.310.2
 
 COPY entrypoint.sh /hongfs/entrypoint.sh
 
-RUN yum -y install podman buildah fuse fuse-overlayfs iputils nfs-utils libicu && \
+RUN yum -y install buildah fuse fuse-overlayfs iputils nfs-utils libicu && \
     rm -rf /var/cache && \
     alias docker=podman && \
+    ls -s /usr/bin/podman /usr/bin/docker && \
     chmod +x /hongfs/entrypoint.sh
 
 RUN echo '#!/bin/bash' > /etc/rc.local && \
