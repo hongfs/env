@@ -9,6 +9,7 @@ COPY entrypoint.sh /hongfs/entrypoint.sh
 
 RUN yum -y install podman buildah fuse fuse-overlayfs iputils nfs-utils libicu && \
     rm -rf /var/cache && \
+    alias docker=podman && \
     chmod +x /hongfs/entrypoint.sh
 
 RUN echo '#!/bin/bash' > /etc/rc.local && \
