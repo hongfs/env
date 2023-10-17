@@ -1,13 +1,16 @@
-FROM quay.io/podman/stable
+FROM quay.io/podman/stable:v4.7.0
 
 WORKDIR /runner
 
-RUN yum -y install podman buildah fuse fuse-overlayfs libicu
+ENV RUNNER_ALLOW_RUNASROOT=1
+
+RUN yum -y install podman buildah fuse fuse-overlayfs libicu && \
+    rm -rf /var/cache/yum
 
 RUN mkdir actions-runner && \
     cd actions-runner && \
     curl -o runner.tar.gz -L https://github.com/actions/runner/releases/download/v2.310.2/actions-runner-linux-x64-2.310.2.tar.gz && \
     tar xzf ./runner.tar.gz && \
     rm ./runner.tar.gz && \
-    pwd && \
-    ls -lh
+    # rm -rf ./externals && \
+    pwd
