@@ -1,1 +1,0 @@
-FROM registry.cn-shenzhen.aliyuncs.com/hongfs/backup-baidupan:main
