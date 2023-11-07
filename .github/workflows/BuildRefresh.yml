@@ -36,6 +36,8 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
 
+          echo "1"
+
           for name in `ls -l | grep ^d | awk '{print $NF}'`; do
             if [[ "$name" =~ ^"runnergo_" ]]; then
               continue
