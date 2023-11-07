@@ -36,14 +36,14 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
 
-          echo "1"
+          echo "2"
 
           for name in `ls -l | grep ^d | awk '{print $NF}'`; do
             if [[ "$name" =~ ^"runnergo_" ]]; then
               continue
             fi
 
-            podman build -q --no-cache --format docker -t $GITHUB_REPOSITORY:$name ./$name/
+            podman build -q --omit-history --no-cache --format docker -t $GITHUB_REPOSITORY:$name ./$name/
             podman tag $GITHUB_REPOSITORY:$name $REGISTRY/$GITHUB_REPOSITORY:$name
             podman push $REGISTRY/$GITHUB_REPOSITORY:$name
           done
