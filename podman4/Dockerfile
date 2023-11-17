@@ -1,3 +1,3 @@
-FROM docker.io/library/rockylinux:9.2.20230513
+FROM docker.io/library/amazonlinux:2023
 
 RUN yum -y install podman
