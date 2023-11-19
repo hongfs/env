@@ -1,0 +1,1 @@
+FROM hoppscotch/proxyscotch:latest@sha256:ef47554e5f81ef89c7b4f437aa8875db2010915efa0854f34861d5ab1899667a
