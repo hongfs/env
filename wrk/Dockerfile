@@ -12,6 +12,7 @@ RUN apk update && \
     cp wrk /usr/local/bin && \
     rm -rf ./.git && \
     rm -rf /code/wrk/obj/openssl-1.1.1i/test && \
-    rm -rf /var/cache/apk/*
+    rm -rf /var/cache/apk/* && \
+    echo "1"
 
 ENTRYPOINT ["wrk"]
