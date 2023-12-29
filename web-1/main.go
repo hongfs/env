@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -35,13 +36,26 @@ func main() {
 		fmt.Fprint(w, "{\"code\":1}\n")
 	})
 
+	http.HandleFunc("/echo", func(writer http.ResponseWriter, r *http.Request) {
+		body, err := io.ReadAll(r.Body)
+
+		if err != nil {
+			fmt.Fprint(writer, "读取请求体失败")
+			return
+		}
+
+		fmt.Sprintf("请求体: %s", string(body))
+
+		fmt.Fprint(writer, string(body))
+	})
+
 	http.HandleFunc("/hostname", func(w http.ResponseWriter, r *http.Request) {
 		if Hostname == "" {
 			fmt.Fprint(w, "无法获取主机名")
 			return
 		}
 
-		fmt.Fprint(w, Hostname + "\n")
+		fmt.Fprint(w, Hostname+"\n")
 	})
 
 	http.ListenAndServe(":80", nil)
