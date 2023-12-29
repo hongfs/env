@@ -44,7 +44,7 @@ func main() {
 			return
 		}
 
-		fmt.Sprintf("请求体: %s", string(body))
+		log.Printf("接收到一个请求: %s\n", string(body))
 
 		fmt.Fprint(writer, string(body))
 	})
