@@ -6,11 +6,11 @@ COPY main.go main.go
 
 RUN env GOOS=linux GOARCH=amd64 go build -o main main.go
 
-FROM ghcr.io/hongfs/env:alpine
+# FROM ghcr.io/hongfs/env:alpine
 
-WORKDIR /build
+# WORKDIR /build
 
-COPY --from=build /code/main /build/
+# COPY --from=build /code/main /build/
 
 EXPOSE 80
 
