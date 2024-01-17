@@ -1,4 +1,4 @@
-FROM ghcr.io/hongfs/env:podman4
+FROM quay.io/podman/stable:v4.7.0
 
 WORKDIR /runner
 
@@ -9,7 +9,10 @@ COPY entrypoint.sh /hongfs/entrypoint.sh
 
 COPY update_ghcr_image.sh /hongfs/update_ghcr_image.sh
 
-RUN chmod +x /hongfs/entrypoint.sh && \
+RUN yum -y install buildah fuse fuse-overlayfs iputils nfs-utils libicu && \
+    rm -rf /var/cache && \
+    ln /usr/bin/podman /usr/bin/docker && \
+    chmod +x /hongfs/entrypoint.sh && \
     chmod +x /hongfs/update_ghcr_image.sh && \
     mkdir actions-runner && \
     cd actions-runner && \
