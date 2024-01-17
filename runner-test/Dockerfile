@@ -9,6 +9,8 @@ COPY entrypoint.sh /hongfs/entrypoint.sh
 
 COPY update_ghcr_image.sh /hongfs/update_ghcr_image.sh
 
+ENV ACTIONS_RUNNER_HOOK_JOB_STARTED=/hongfs/update_ghcr_image.sh
+
 RUN yum -y install buildah fuse fuse-overlayfs iputils nfs-utils libicu && \
     rm -rf /var/cache && \
     ln /usr/bin/podman /usr/bin/docker && \
