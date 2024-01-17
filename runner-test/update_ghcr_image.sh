@@ -2,10 +2,6 @@
 
 set -e
 
-if [ "$HAS_HONGKONG_VPC_REGISTRY" != "1" ]; then
-    exit 0
-fi
-
 if [ -e "$(pwd)/Dockerfile" ]; then
     echo "Dockerfile exists"
 
