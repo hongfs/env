@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"runtime"
+	"time"
 )
 
 var Hostname = ""
@@ -23,6 +24,12 @@ func main() {
 	})
 
 	http.HandleFunc("/status", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprint(w, "{\"code\":1}\n")
+	})
+
+	http.HandleFunc("/sleep", func(w http.ResponseWriter, r *http.Request) {
+		time.Sleep(time.Second * 10)
+
 		fmt.Fprint(w, "{\"code\":1}\n")
 	})
 
