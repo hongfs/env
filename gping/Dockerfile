@@ -1,0 +1,1 @@
+FROM ghcr.io/orf/gping:gping-v1.16.0
