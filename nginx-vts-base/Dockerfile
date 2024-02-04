@@ -1,5 +1,7 @@
 FROM alpine
 
+ENV NGINX_VERSION=1.25.3
+
 RUN apk update && \
     apk add --no-cache git curl gcc libc-dev make openssl-dev pcre2-dev zlib-dev linux-headers libxslt-dev gd-dev geoip-dev libedit-dev bash alpine-sdk findutils ca-certificates gettext && \
     cd && \
@@ -9,9 +11,9 @@ RUN apk update && \
     make njs && \
     cd ../ && \
     git clone https://github.com/vozlt/nginx-module-vts && \
-    curl https://nginx.org/download/nginx-1.23.4.tar.gz -o nginx.tar.gz && \
+    curl https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o nginx.tar.gz && \
     tar -zxvf nginx.tar.gz && \
-    cd nginx-1.23.4 && \
+    cd nginx-$NGINX_VERSION && \
     addgroup -g 101 -S nginx && \
     adduser -S -D -H -u 101 -h /var/cache/nginx -s /sbin/nologin -G nginx -g nginx nginx && \
     ./configure --prefix=/etc/nginx \
