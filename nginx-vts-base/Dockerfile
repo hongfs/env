@@ -54,6 +54,7 @@ RUN apk update && \
         --add-module=$HOME/njs/nginx && \
     make && \
     make install && \
+    make modules && \
     mkdir -p /var/log/nginx && \
     mkdir -p /var/cache/nginx && \
     mkdir -p /var/cache/nginx/client_temp && \
