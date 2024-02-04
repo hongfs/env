@@ -1,4 +1,4 @@
-FROM alpine
+FROM ghcr.io/hongfs/env:alpine
 
 ENV NGINX_VERSION=1.25.3
 
@@ -18,7 +18,7 @@ RUN apk update && \
     adduser -S -D -H -u 101 -h /var/cache/nginx -s /sbin/nologin -G nginx -g nginx nginx && \
     ./configure --prefix=/etc/nginx \
         --sbin-path=/usr/sbin/nginx \
-        --modules-path=/usr/lib/nginx/modules \
+        --modules-path=/etc/nginx/modules \
         --conf-path=/etc/nginx/nginx.conf \
         --error-log-path=/var/log/nginx/error.log \
         --http-log-path=/var/log/nginx/access.log \
@@ -66,7 +66,7 @@ RUN apk update && \
     rm -rf $HOME/nginx.tar.gz && \
     rm -rf $HOME/nginx-module-vts && \
     rm -rf $HOME/njs && \
-    rm -rf $HOME/nginx-1.23.4
+    rm -rf $HOME/nginx-$NGINX_VERSION
 
 EXPOSE 80
 
