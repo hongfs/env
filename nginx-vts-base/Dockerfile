@@ -64,7 +64,10 @@ RUN apk update && \
     mkdir -p /var/cache/nginx/scgi_temp && \
     apk del git gcc make && \
     rm -rf /var/cache/apk && \
-    rm -rf $HOME/nginx.tar.gz
+    rm -rf $HOME/nginx.tar.gz && \
+    rm -rf $HOME/nginx-module-vts && \
+    rm -rf $HOME/njs && \
+    rm -rf $HOME/nginx-$NGINX_VERSION
 
 EXPOSE 80
 
