@@ -50,8 +50,8 @@ RUN apk update && \
         --with-http_v2_module \
         --with-cc-opt='-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fPIC' \
         --with-ld-opt='-Wl,-z,relro -Wl,-z,now -Wl,--as-needed -pie' \
-        --add-module=$HOME/nginx-module-vts \
-        --add-module=$HOME/njs/nginx && \
+        --add-dynamic-module=$HOME/nginx-module-vts \
+        --add-dynamic-module=$HOME/njs/nginx && \
     make && \
     make install && \
     make modules && \
