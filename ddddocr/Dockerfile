@@ -9,7 +9,6 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN curl -Ls https://api.github.com/repos/sml2h3/ocr_api_server/tarball/main -o /tmp/code.tar.gz && \
-    mkdir /code && \
     tar -xzf /tmp/code.tar.gz -C /code --strip-components=1 && \
     rm -rf /tmp/code.tar.gz
 
