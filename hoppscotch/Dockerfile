@@ -1,1 +1,1 @@
-FROM docker.io/hoppscotch/hoppscotch:2023.8.4
+FROM docker.io/hoppscotch/hoppscotch:2023.12.3

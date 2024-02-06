@@ -1,4 +1,3 @@
-# 编译
 FROM ghcr.io/hongfs/env:golang121 as build
 
 WORKDIR /code
