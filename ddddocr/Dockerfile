@@ -2,11 +2,16 @@ FROM ubuntu:22.04 AS download
 
 WORKDIR /code
 
-ADD https://github.com//archive/refs/heads/main.tgz https://api.github.com/repos/sml2h3/ocr_api_server/tarball/main /tmp/code.tar.gz
+ADD https://api.github.com/repos/sml2h3/ocr_api_server/tarball/main /tmp/code.tar.gz
 
-RUN tar -xzf /tmp/code.tar.gz -C /code && \
-    rm -rf /tmp/code.tar.gz && \
-    pwd
+RUN apt-get update && \
+    apt-get install -y curl && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN curl -Ls https://api.github.com/repos/sml2h3/ocr_api_server/tarball/main -o /tmp/code.tar.gz && \
+    mkdir /code && \
+    tar -xzf /tmp/code.tar.gz -C /code --strip-components=1 && \
+    rm -rf /tmp/code.tar.gz
 
 FROM python:3.8-slim-buster
 
