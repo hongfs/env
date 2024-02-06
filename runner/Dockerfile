@@ -1,4 +1,4 @@
-FROM quay.io/podman/stable:v4.7.0
+FROM quay.io/podman/stable:v4.9.0
 
 WORKDIR /runner
 
