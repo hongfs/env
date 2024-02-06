@@ -2,7 +2,7 @@ FROM ubuntu:22.04 AS download
 
 WORKDIR /code
 
-ADD https://github.com/sml2h3/ocr_api_server/archive/refs/heads/main.tgz /tmp/code.tar.gz
+ADD https://github.com//archive/refs/heads/main.tgz https://api.github.com/repos/sml2h3/ocr_api_server/tarball/main /tmp/code.tar.gz
 
 RUN tar -xzf /tmp/code.tar.gz -C /code && \
     rm -rf /tmp/code.tar.gz && \
