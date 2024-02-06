@@ -73,4 +73,4 @@ $ podman run --rm -it -v ~/lang:/data/ ghcr.io/hongfs/env:php-language php index
 
 ## 🙏
 
-![JetBrains](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png)
+[<img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" width="200">](https://jb.gg/OpenSourceSupport)
