@@ -1,0 +1,1 @@
+FROM ghcr.io/containerd/nerdctl:v1.7.3
