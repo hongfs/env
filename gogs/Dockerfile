@@ -1,1 +1,1 @@
-FROM docker.io/gogs/gogs:0.13
+FROM docker.io/gogs/gogs:latest@sha256:e8842ff13cd8d9267e9fa4fa0d87c99b5884eda522b043491b2ed3b92fb8c4c0
