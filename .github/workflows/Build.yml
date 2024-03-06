@@ -41,6 +41,10 @@ jobs:
               continue
             fi
 
+            if [ ! -d "./$name/" ]; then
+              continue
+            fi
+
             if [[ "$name" =~ ^"runnergo_" ]]; then
               docker buildx create --name builder_$name --driver docker-container
               docker buildx use builder_$name
