@@ -1,1 +1,0 @@
-FROM docker.io/hoppscotch/hoppscotch:2023.12.3
