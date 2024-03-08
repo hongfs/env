@@ -6,7 +6,7 @@ on:
       - ".github/workflows/BuildTDesignWeapp.yml"
 
 env:
-  version: 1.2.8
+  version: 1.2.9
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: Tencent/tdesign-miniprogram
           ref: ${{ env.version }}
