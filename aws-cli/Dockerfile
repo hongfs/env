@@ -2,9 +2,11 @@ FROM ghcr.io/hongfs/env:debian
 
 ENV AWS_EC2_METADATA_DISABLED=true
 
+ENV VERSION=2.15.28
+
 RUN apt-get update && \
     apt-get -y install unzip curl && \
-    curl -Ls https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.13.13.zip -o aws.zip && \
+    curl -Ls https://awscli.amazonaws.com/awscli-exe-linux-x86_64-$VERSION.zip -o aws.zip && \
     unzip aws.zip && \
     rm -rf aws.zip && \
     ./aws/install && \
