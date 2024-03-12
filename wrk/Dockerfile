@@ -1,6 +1,6 @@
 # 来源：https://github.com/skandyla/docker-wrk/blob/master/alpine/Dockerfile
 
-FROM alpine as build
+FROM ghcr.io/hongfs/env:alpine as build
 
 WORKDIR /code
 
