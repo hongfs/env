@@ -25,7 +25,6 @@ RUN docker-php-ext-install -j$(nproc) sockets && \
     pecl install redis-6.0.2 && \
     pecl install imagick-3.7.0 && \
     pecl install mongodb-1.16.2 && \
-    pecl install oci8-3.3.0 && \
     pecl install event-3.0.8 && \
     pecl install inotify-3.0.0 && \
     pecl install msgpack-2.2.0 && \
@@ -33,7 +32,7 @@ RUN docker-php-ext-install -j$(nproc) sockets && \
     pecl install yaconf-1.1.2 && \
     # https://github.com/docker-library/php/issues/1258#issuecomment-1058285860
     docker-php-ext-enable --ini-name zz-event.ini event && \
-    docker-php-ext-enable mysqli gd redis imagick mongodb oci8 event inotify msgpack yac yaconf && \
+    docker-php-ext-enable mysqli gd redis imagick mongodb event inotify msgpack yac yaconf && \
     # 不生效，自行在 dockerfile 中添加
     docker-php-ext-install pcntl
 
