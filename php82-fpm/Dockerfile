@@ -7,18 +7,39 @@ LABEL org.opencontainers.image.description "PHP 线上环境，已安装 opcache
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
-RUN pwd && \
-    mkdir -p /tmp/opcache && \
-    apt-get update && \
-    apt-get install -y git zip libpng-dev libzip-dev libmagickwand-dev iproute2 procps && \
+RUN apt-get update && \
+    apt-get install -y git zip libevent-dev libpng-dev libzip-dev libssl-dev libmagickwand-dev iproute2 procps nload && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
-    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
+    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+RUN docker-php-ext-install -j$(nproc) sockets && \
+    docker-php-ext-install -j$(nproc) pdo && \
+    docker-php-ext-install -j$(nproc) pdo_mysql && \
+    docker-php-ext-install -j$(nproc) mysqli && \
+    docker-php-ext-install -j$(nproc) gd && \
+    docker-php-ext-install -j$(nproc) zip && \
+    docker-php-ext-install -j$(nproc) bcmath && \
+    docker-php-ext-install -j$(nproc) opcache && \
+    docker-php-ext-install -j$(nproc) pcntl && \
+    pecl install redis-6.0.2 && \
+    pecl install imagick-3.7.0 && \
+    pecl install mongodb-1.16.2 && \
+    pecl install oci8-3.3.0 && \
+    pecl install event-3.0.8 && \
+    pecl install inotify-3.0.0 && \
+    pecl install msgpack-2.2.0 && \
+    pecl install yac-2.3.1 && \
+    pecl install yaconf-1.1.2 && \
+    # https://github.com/docker-library/php/issues/1258#issuecomment-1058285860
+    docker-php-ext-enable --ini-name zz-event.ini event && \
+    docker-php-ext-enable mysqli gd redis imagick mongodb oci8 event inotify msgpack yac yaconf && \
+    # 不生效，自行在 dockerfile 中添加
+    docker-php-ext-install pcntl
+
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
     # 关闭 PHP 版本的显示
     sed -i "s+expose_php = On+expose_php = Off+" "$PHP_INI_DIR/php.ini" && \
-    # 关闭 GC，如果涉及到队列那可能会存在问题
-    sed -i "s+zend.enable_gc = On+zend.enable_gc = Off+" "$PHP_INI_DIR/php.ini" && \
     # 序列化浮点数时存储的有效数字的位数。
     sed -i "s+serialize_precision = -1+serialize_precision = 14+" "$PHP_INI_DIR/php.ini" && \
     # 默认上海时区
@@ -27,17 +48,7 @@ RUN pwd && \
     sed -i "s+bcmath.scale = 0+bcmath.scale = 2+" "$PHP_INI_DIR/php.ini" && \
     # 关闭 cookice
     sed -i "s+session.use_cookies = 1+session.use_cookies = 0+" "$PHP_INI_DIR/php.ini" && \
-    sed -i "s+session.use_only_cookies = 1+session.use_only_cookies = 0+" "$PHP_INI_DIR/php.ini" && \
-    pecl install redis-5.3.7 && \
-    pecl install imagick-3.7.0 && \
-    pecl install yaconf-1.1.2 && \
-    pecl install yac-2.3.1 && \
-    docker-php-ext-install pdo pdo_mysql mysqli gd zip && \
-    docker-php-ext-install bcmath && \
-    docker-php-ext-install opcache && \
-    docker-php-ext-enable mysqli gd redis imagick yaconf yac && \
-    # 不生效，自行在 dockerfile 中添加
-    docker-php-ext-install pcntl
+    sed -i "s+session.use_only_cookies = 1+session.use_only_cookies = 0+" "$PHP_INI_DIR/php.ini"
 
 # 设置 opcache
 RUN echo "[opcache]\n\
@@ -56,7 +67,7 @@ opcache.enable_file_override=0" > "$PHP_INI_DIR/conf.d/opcache.ini"
 # 设置 php-fpm
 RUN echo "\n\
 pm = static\n\
-pm.max_children = 20\n\
+pm.max_children = 50\n\
 pm.max_requests = 10000" >> /usr/local/etc/php-fpm.d/zz-docker.conf
 
 RUN php -m
