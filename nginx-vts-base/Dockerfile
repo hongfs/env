@@ -79,6 +79,8 @@ RUN apk update && \
     rm -rf $HOME/njs && \
     rm -rf $HOME/nginx-$NGINX_VERSION
 
+COPY nginx.conf /etc/nginx/nginx.conf
+
 EXPOSE 80
 
 STOPSIGNAL SIGQUIT
