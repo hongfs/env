@@ -10,12 +10,14 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* && \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-png --enable-gd-native-ttf && \
+RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg --with-webp && \
+    cd /usr/src/php/ext/gd && make && \
+    cp /usr/src/php/ext/gd/modules/gd.so /usr/local/lib/php/extensions/no-debug-non-zts-20190902/gd.so && \
     docker-php-ext-install -j$(nproc) sockets && \
     docker-php-ext-install -j$(nproc) pdo && \
     docker-php-ext-install -j$(nproc) pdo_mysql && \
     docker-php-ext-install -j$(nproc) mysqli && \
-    docker-php-ext-install gd && \
+    docker-php-ext-install -j$(nproc) gd && \
     docker-php-ext-install -j$(nproc) zip && \
     docker-php-ext-install -j$(nproc) bcmath && \
     docker-php-ext-install -j$(nproc) opcache && \
