@@ -5,12 +5,17 @@ FROM php:7.4.33-cli as php
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN apt-get update && \
-    apt-get install -y git zip libevent-dev libpng-dev libzip-dev libssl-dev libmagickwand-dev iproute2 procps && \
+    apt-get install -y git zip libevent-dev libpng-dev libpng12-dev libjpeg-dev libfreetype6-dev libzip-dev libssl-dev libmagickwand-dev iproute2 procps && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-RUN docker-php-ext-install -j$(nproc) sockets && \
+RUN docker-php-ext-configure gd \
+        --enable-gd-native-ttf \
+        --with-freetype-dir=/usr/include/freetype2 \
+        --with-png-dir=/usr/include \
+        --with-jpeg-dir=/usr/include && \
+    docker-php-ext-install -j$(nproc) sockets && \
     docker-php-ext-install -j$(nproc) pdo && \
     docker-php-ext-install -j$(nproc) pdo_mysql && \
     docker-php-ext-install -j$(nproc) mysqli && \
@@ -20,6 +25,7 @@ RUN docker-php-ext-install -j$(nproc) sockets && \
     docker-php-ext-install -j$(nproc) opcache && \
     docker-php-ext-install -j$(nproc) pcntl && \
     pecl install redis-6.0.0 && \
+    pecl install imagick-3.7.0 && \
     pecl install mongodb-1.16.2 && \
     pecl install oci8-2.2.0 && \
     pecl install event-3.0.8 && \
@@ -29,7 +35,7 @@ RUN docker-php-ext-install -j$(nproc) sockets && \
     pecl install yaconf-1.1.2 && \
     # https://github.com/docker-library/php/issues/1258#issuecomment-1058285860
     docker-php-ext-enable --ini-name zz-event.ini event && \
-    docker-php-ext-enable mysqli gd redis mongodb oci8 event inotify msgpack yac yaconf
+    docker-php-ext-enable mysqli gd redis imagick mongodb oci8 event inotify msgpack yac yaconf
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
     # 关闭 PHP 版本的显示
