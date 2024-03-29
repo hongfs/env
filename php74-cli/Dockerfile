@@ -5,16 +5,12 @@ FROM php:7.4.33-cli as php
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN apt-get update && \
-    apt-get install -y git zip libevent-dev libpng-dev libpng12-dev libjpeg-dev libfreetype6-dev libzip-dev libssl-dev libmagickwand-dev iproute2 procps && \
+    apt-get install -y git zip libevent-dev libpng-dev libjpeg-dev libfreetype6-dev libzip-dev libssl-dev libmagickwand-dev iproute2 procps && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-RUN docker-php-ext-configure gd \
-        --enable-gd-native-ttf \
-        --with-freetype-dir=/usr/include/freetype2 \
-        --with-png-dir=/usr/include \
-        --with-jpeg-dir=/usr/include && \
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp && \
     docker-php-ext-install -j$(nproc) sockets && \
     docker-php-ext-install -j$(nproc) pdo && \
     docker-php-ext-install -j$(nproc) pdo_mysql && \
