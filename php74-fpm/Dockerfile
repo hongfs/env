@@ -45,6 +45,7 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
     # BC 的小数点默认 2 位
     sed -i "s+bcmath.scale = 0+bcmath.scale = 2+" "$PHP_INI_DIR/php.ini" && \
     # 关闭 cookice
+    # ------------ fastadmin 需要打开 cookie，不然会提示 “令牌数据无效” --------------------
     sed -i "s+session.use_cookies = 1+session.use_cookies = 0+" "$PHP_INI_DIR/php.ini" && \
     sed -i "s+session.use_only_cookies = 1+session.use_only_cookies = 0+" "$PHP_INI_DIR/php.ini"
 
