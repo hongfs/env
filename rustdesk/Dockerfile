@@ -1,0 +1,1 @@
+FROM docker.io/rustdesk/rustdesk-server:1.1.10-3
