@@ -1,20 +1,23 @@
-FROM library/composer:2.5.8 as composer
+FROM library/composer:2.7.4 as composer
 
-FROM php:8.2.10-cli as php
+FROM library/php:8.2.18-cli as php
+
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN apt-get update && \
-    apt-get install -y git zip libevent-dev libpng-dev libzip-dev libssl-dev libmagickwand-dev iproute2 procps && \
+    apt-get install -y git zip libevent-dev libpng-dev libjpeg-dev libwebp-dev libfreetype6-dev libzip-dev libssl-dev libmagickwand-dev iproute2 procps && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
-RUN docker-php-ext-install -j$(nproc) sockets && \
+RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg --with-webp && \
+    docker-php-ext-install -j$(nproc) gd && \
+    docker-php-ext-install -j$(nproc) sockets && \
     docker-php-ext-install -j$(nproc) pdo && \
     docker-php-ext-install -j$(nproc) pdo_mysql && \
     docker-php-ext-install -j$(nproc) mysqli && \
-    docker-php-ext-install -j$(nproc) gd && \
     docker-php-ext-install -j$(nproc) zip && \
     docker-php-ext-install -j$(nproc) bcmath && \
     docker-php-ext-install -j$(nproc) opcache && \
