@@ -1,6 +1,6 @@
-FROM library/composer:2.7.4 as composer
+FROM docker.io/library/composer:2.7.4 as composer
 
-FROM library/php:8.2.18-cli as php
+FROM docker.io/library/php:8.2.18-cli as php
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
