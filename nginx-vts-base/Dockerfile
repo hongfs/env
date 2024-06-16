@@ -1,6 +1,6 @@
 FROM ghcr.io/hongfs/env:alpine
 
-ENV NGINX_VERSION=1.25.4
+ENV NGINX_VERSION=1.26.1
 
 RUN apk update && \
     apk add --no-cache git curl gcc libc-dev make openssl-dev pcre2-dev zlib-dev linux-headers libxslt-dev gd-dev geoip-dev libedit-dev bash alpine-sdk findutils ca-certificates gettext && \
