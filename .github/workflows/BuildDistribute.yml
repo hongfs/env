@@ -1,0 +1,40 @@
+name: Distribute
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Build
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd $GITHUB_WORKSPACE
+
+          for name in $(git diff --name-only HEAD^ HEAD | awk -F/ '{print $1}' | sort -u); do
+            if [[ $name == .* ]]; then
+              continue
+            fi
+
+            if [ ! -d "./$name/" ]; then
+              continue
+            fi
+
+            if [ -e "$name/Dockerfile" ]; then
+              gh workflow run Build.yaml -f name=$name
+            fi
+          done

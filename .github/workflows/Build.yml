@@ -1,60 +1,53 @@
 name: Build Docker image
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Name of the build'
+        required: true
+        type: string
 
 env:
   REGISTRY: ghcr.io
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event.inputs.name }}
   cancel-in-progress: true
 
 jobs:
-  build:
+  run:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
+      id-token: write
+      attestations: write
+
+    outputs:
+      IMAGE_DIGEST: ${{ steps.build.outputs.digest }}
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 1
 
-      - name: Log in to the Container registry
-        uses: docker/login-action@v3
+      - uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build
-        run: |
-          cd $GITHUB_WORKSPACE
+      - uses: docker/build-push-action@v6
+        id: push
+        with:
+          context: ./${{ github.event.inputs.name }}
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}:${{ github.event.inputs.name }}
 
-          for name in $(git diff --name-only HEAD^ HEAD | awk -F/ '{print $1}' | sort -u); do
-            if [[ $name == .* ]]; then
-              continue
-            fi
-
-            if [ ! -d "./$name/" ]; then
-              continue
-            fi
-
-            if [[ "$name" =~ ^"runnergo_" ]]; then
-              docker buildx create --name builder_$name --driver docker-container
-              docker buildx use builder_$name
-              docker buildx build --no-cache --platform=linux/amd64,linux/arm64 -t $REGISTRY/$GITHUB_REPOSITORY:$name --push ./$name/
-              continue
-            fi
-
-            if [ -e "$name/Dockerfile" ]; then
-              podman build --no-cache --format docker -t $GITHUB_REPOSITORY:$name ./$name/
-              podman tag $GITHUB_REPOSITORY:$name $REGISTRY/$GITHUB_REPOSITORY:$name
-              podman push $REGISTRY/$GITHUB_REPOSITORY:$name
-            fi
-          done
+      - uses: actions/attest-build-provenance@v1
+        id: attest
+        with:
+          subject-name: ${{ env.REGISTRY }}/${{ github.repository }}
+          subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: true

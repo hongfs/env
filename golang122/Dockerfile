@@ -1,4 +1,4 @@
-FROM docker.io/library/golang:1.22.4-alpine
+FROM docker.io/library/golang:1.22.5-alpine
 
 ENV GO111MODULE=on \
     CGO_ENABLED=0 \
