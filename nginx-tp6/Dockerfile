@@ -1,4 +1,4 @@
-FROM nginx:1.25.3
+FROM docker.io/library/nginx:1.27.0
 
 WORKDIR /web
 
