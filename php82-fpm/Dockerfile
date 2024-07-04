@@ -1,6 +1,6 @@
-FROM docker.io/library/composer:2.7.2 as composer
+FROM docker.io/library/composer:2.7.7 as composer
 
-FROM docker.io/library/php:8.2.16-fpm as php
+FROM docker.io/library/php:8.2.20-fpm as php
 
 LABEL org.opencontainers.image.source="https://github.com/hongfs/env/tree/main/php82-fpm"
 LABEL org.opencontainers.image.description "PHP 线上环境，已安装 opcache redis imagick"

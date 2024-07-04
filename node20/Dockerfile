@@ -1,1 +1,1 @@
-FROM docker.io/library/node:20.9.0
+FROM docker.io/library/node:20.15.0

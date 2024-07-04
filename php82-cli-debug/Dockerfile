@@ -1,6 +1,6 @@
-FROM library/composer:2.5.8 as composer
+FROM docker.io/library/composer:2.7.7 as composer
 
-FROM library/php:8.2.9-cli as php
+FROM library/php:8.2.20-cli as php
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
