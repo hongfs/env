@@ -7,4 +7,5 @@ ENV GO111MODULE=on \
 
 RUN apk update && \
     apk add --no-cache build-base && \
-    rm -rf /var/cache/apk/*
+    rm -rf /var/cache/apk/* && \
+    echo "1"

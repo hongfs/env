@@ -35,6 +35,6 @@ jobs:
             fi
 
             if [ -e "$name/Dockerfile" ]; then
-              gh workflow run Build.yaml -f name=$name
+              gh workflow run Build.yml -f name=$name
             fi
           done
