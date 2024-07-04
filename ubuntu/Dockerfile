@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM docker.io/library/ubuntu:24.04
 
 ENV TZ=Asia/Shanghai
 

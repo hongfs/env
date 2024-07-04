@@ -1,1 +1,1 @@
-FROM apachepulsar/pulsar:3.2.2
+FROM docker.io/apachepulsar/pulsar:3.3.0
