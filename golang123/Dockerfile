@@ -1,4 +1,4 @@
-FROM docker.io/library/golang:1.22.7-alpine
+FROM docker.io/library/golang:1.23.1-alpine
 
 ENV GO111MODULE=on \
     CGO_ENABLED=0 \
@@ -7,5 +7,4 @@ ENV GO111MODULE=on \
 
 RUN apk update && \
     apk add --no-cache build-base && \
-    rm -rf /var/cache/apk/* && \
-    echo "2"
+    rm -rf /var/cache/apk/*
