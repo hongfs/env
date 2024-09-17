@@ -28,5 +28,9 @@ jobs:
       - name: Build
         run: |
           cd $GITHUB_WORKSPACE
+
+          apt-get update
+          apt-get install -y libgpgme-dev
+
           make bin/skopeo
           ls -lh
