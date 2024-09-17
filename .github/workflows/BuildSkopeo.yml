@@ -33,4 +33,5 @@ jobs:
           sudo apt-get install -y libgpgme-dev
 
           make bin/skopeo
+          cd bin/
           ls -lh
