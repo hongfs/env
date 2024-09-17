@@ -1,0 +1,31 @@
+name: Build Skopeo
+
+on:
+  push:
+    paths:
+      - ".github/workflows/BuildSkopeo.yml"
+
+env:
+  version: 1.16.1
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-tdesign:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          repository: containers/skopeo
+          ref: ${{ env.version }}
+
+      - name: Build
+        run: |
+          cd $GITHUB_WORKSPACE
+          ls -lh
