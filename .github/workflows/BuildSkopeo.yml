@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-tdesign:
+  build-skopeo:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -28,4 +28,5 @@ jobs:
       - name: Build
         run: |
           cd $GITHUB_WORKSPACE
+          make bin/skopeo
           ls -lh
