@@ -39,9 +39,9 @@ jobs:
           make binary DISABLE_CGO=1
           cd bin/
           ls -lh
-      # - uses: ncipollo/release-action@v1
-      #   with:
-      #     allowUpdates: true
-      #     omitBody: true
-      #     artifacts: bin/skopeo
-      #     tag: skopeo-${{ env.version }}
+      - uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          omitBody: true
+          artifacts: bin/skopeo
+          tag: skopeo-${{ env.version }}
