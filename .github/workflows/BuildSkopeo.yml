@@ -32,12 +32,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libgpgme-dev
 
-          make bin/skopeo
-          cd bin/
+          make binary DISABLE_CGO=1
           ls -lh
-      - uses: ncipollo/release-action@v1
-        with:
-          allowUpdates: true
-          omitBody: true
-          artifacts: bin/skopeo
-          tag: skopeo-${{ env.version }}
+      # - uses: ncipollo/release-action@v1
+      #   with:
+      #     allowUpdates: true
+      #     omitBody: true
+      #     artifacts: bin/skopeo
+      #     tag: skopeo-${{ env.version }}
