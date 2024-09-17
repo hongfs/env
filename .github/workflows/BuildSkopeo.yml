@@ -6,7 +6,7 @@ on:
       - ".github/workflows/BuildSkopeo.yml"
 
 env:
-  version: 1.16.1
+  version: v1.16.1
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
