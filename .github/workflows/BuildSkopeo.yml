@@ -35,3 +35,9 @@ jobs:
           make bin/skopeo
           cd bin/
           ls -lh
+      - uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          omitBody: true
+          artifacts: bin/skopeo
+          tag: skopeo-${{ env.version }}
