@@ -31,9 +31,11 @@ jobs:
           npm i
           npm run build
           tar -czvf TDesign-${{ env.version }}.tar.gz miniprogram_dist/
+
+          curl -s 'https://api.github.com/repos/Tencent/tdesign-miniprogram/releases/tags/${{ env.version }}' | jq --raw-output '.body' > /tmp/release.md
       - uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          omitBody: true
           artifacts: TDesign-${{ env.version }}.tar.gz
           tag: TDesign-${{ env.version }}
+          bodyFile: /tmp/release.md
