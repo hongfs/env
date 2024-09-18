@@ -6,7 +6,7 @@ on:
       - ".github/workflows/BuildKubeKey.yml"
 
 env:
-  version: v3.0.9
+  version: 3.0.9
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -16,24 +16,24 @@ jobs:
   build-kubekey:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      packages: write
+      contents: write
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: kubesphere/kubekey
-          ref: ${{ env.version }}
+          ref: v${{ env.version }}
 
       - name: Build
         run: |
           cd $GITHUB_WORKSPACE
           make kk
-          chmod +x ./bin/kk
+
+          curl -s 'https://api.github.com/repos/kubesphere/kubekey/releases/tags/v${{ env.version }}' | jq --raw-output '.body' > /tmp/release.md
       - uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          omitBody: true
           artifacts: ./bin/kk
           tag: kubekey-${{ env.version }}-kk
+          bodyFile: /tmp/release.md
