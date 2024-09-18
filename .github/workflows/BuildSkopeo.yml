@@ -38,12 +38,10 @@ jobs:
 
           curl -s 'https://api.github.com/repos/containers/skopeo/releases/tags/v${{ env.version }}' | jq '.body' > /tmp/release.md
 
-          cat /tmp/release.md
-
-#          make binary DISABLE_CGO=1
-      # - uses: ncipollo/release-action@v1
-      #   with:
-      #     allowUpdates: true
-      #     omitBody: true
-      #     artifacts: bin/skopeo
-      #     tag: skopeo-${{ env.version }}
+          make binary DISABLE_CGO=1
+      - uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifacts: bin/skopeo
+          tag: skopeo-${{ env.version }}
+          bodyFile: /tmp/release.md
