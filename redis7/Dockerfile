@@ -1,4 +1,4 @@
-FROM docker.io/library/redis:7.2.5
+FROM docker.io/library/redis:7.2.6
 
 RUN apt-get update && \
     apt-get install -y iproute2 curl tzdata ca-certificates iputils-ping coreutils && \
