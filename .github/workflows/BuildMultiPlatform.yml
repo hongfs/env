@@ -42,11 +42,11 @@ jobs:
         id: push
         with:
           context: ./${{ github.event.inputs.name }}
-          platform:
-            - linux/amd64
-            - linux/arm/v6
-            - linux/arm/v7
-            - linux/arm64
+          platforms: |
+            linux/amd64
+            linux/arm/v6
+            linux/arm/v7
+            linux/arm64
           push: true
           tags: ${{ env.REGISTRY }}/${{ github.repository }}:${{ github.event.inputs.name }}
 
