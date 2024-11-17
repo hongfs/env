@@ -34,6 +34,11 @@ jobs:
               continue
             fi
 
+            if [[ $name == *"arm"* ]]; then
+              gh workflow run BuildMultiPlatform.yml -f name=$name
+              continue
+            fi
+
             if [ -e "$name/Dockerfile" ]; then
               gh workflow run Build.yml -f name=$name
             fi
