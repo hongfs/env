@@ -46,7 +46,7 @@ jobs:
         id: push
         with:
           context: ./${{ github.event.inputs.name }}
-          platforms: linux/arm64, linux/amd64, linux/arm64/v8, linux/arm64/v7
+          platforms: linux/arm64/v8
           push: true
           tags: ${{ env.REGISTRY }}/${{ github.repository }}:${{ github.event.inputs.name }}
 
