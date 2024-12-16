@@ -11,6 +11,8 @@ LABEL description="OCR software, free and offline."
 LABEL license="MIT"
 LABEL org.opencontainers.image.source="https://github.com/hiroi-sora/Umi-OCR_runtime_linux"
 
+ENV HEADLESS=true
+
 # 安装所需工具和QT依赖库
 RUN apt-get update && apt-get install -y \
     wget xz-utils ttf-wqy-microhei xvfb \
