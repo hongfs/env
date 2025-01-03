@@ -1,0 +1,23 @@
+name: Build ThinkPHP
+
+on:
+  push:
+    paths:
+      - ".github/workflows/BuildThinkPHP.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-thinkphp:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Build
+        run: |
+          cd $GITHUB_WORKSPACE
+
+          composer create-project topthink/think tp
+
+          ls -lh
