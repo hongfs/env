@@ -21,6 +21,6 @@ jobs:
           composer create-project topthink/think tp
 
           cd tp
-          ls -lh
 
           composer show
+          composer install -vvv
