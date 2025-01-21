@@ -2,7 +2,7 @@ FROM ghcr.io/hongfs/env:ubuntu AS download
 
 WORKDIR /code
 
-ENV VERSION=3.0.222
+ENV VERSION=3.0.249
 
 ADD https://github.com/aliyun/aliyun-cli/releases/download/v$VERSION/aliyun-cli-linux-$VERSION-amd64.tgz /tmp/code.tar.gz
 
