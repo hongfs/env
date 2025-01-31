@@ -1,0 +1,8 @@
+streamlit
+streamlit-cropper
+torch
+timm
+Pillow
+scikit-learn
+certifi
+requests
