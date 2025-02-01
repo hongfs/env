@@ -79,7 +79,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             self.send_error(404, "Page not Found")
 
 def run(server_class=HTTPServer, handler_class=MyRequestHandler, port=8080):
-    server_address = ('', port)
+    server_address = ('0.0.0.0', port)
     httpd = server_class(server_address, handler_class)
     print(f'Starting httpd on port {port}...')
     httpd.serve_forever()
