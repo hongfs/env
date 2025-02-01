@@ -62,7 +62,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
 
             extractor = FeatureExtractor("resnet34")
 
-            filepath = os.path.join("./img/", "%d" % time.time()) + os.path.splitext(query_string.get('image')[0])[1]
+            filepath = os.path.join("/tmp/", "%d" % time.time()) + os.path.splitext(query_string.get('image')[0])[1]
 
             with open(filepath, "wb") as f:
                 f.write(image_response.content)
