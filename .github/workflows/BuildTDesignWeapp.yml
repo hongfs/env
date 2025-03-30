@@ -6,7 +6,7 @@ on:
       - ".github/workflows/BuildTDesignWeapp.yml"
 
 env:
-  version: 1.8.5
+  version: 1.8.7
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
