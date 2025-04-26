@@ -1,0 +1,1 @@
+FROM ghcr.io/fatedier/frpc:v0.62.0
