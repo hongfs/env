@@ -3,7 +3,7 @@ FROM quay.io/podman/stable:v4.9.3
 WORKDIR /runner
 
 ENV RUNNER_ALLOW_RUNASROOT=1
-ENV RUNNER_VERSION=2.323.0
+ENV RUNNER_VERSION=2.324.0
 
 COPY entrypoint.sh /hongfs/entrypoint.sh
 
