@@ -1,1 +1,1 @@
-FROM ghcr.io/fatedier/frps:v0.62.0
+FROM ghcr.io/fatedier/frps:v0.62.1
