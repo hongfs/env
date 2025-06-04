@@ -1,0 +1,1 @@
+FROM ghcr.io/anduin2017/how-to-cook:latest
