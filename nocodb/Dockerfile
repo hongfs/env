@@ -1,0 +1,1 @@
+FROM docker.io/nocodb/nocodb:0.263.8
