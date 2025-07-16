@@ -1,0 +1,1 @@
+FROM ghcr.io/finb/bark-server:v2.2.1
